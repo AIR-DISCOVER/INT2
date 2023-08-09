@@ -19,6 +19,7 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 
 
 <br>
+<hr>
 
 ><h3><strong><i>🚀 News</i></strong></h3>
 ><h4>[coming soon]: INT2 Motion Prediciton Challenge 2023 and INT2 Interactive Motion Prediction Challenge 2023 in this <a href="https://int2.cn/challenges">challenges page</a>.</h4>

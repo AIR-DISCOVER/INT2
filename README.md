@@ -46,6 +46,7 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 <a align='center'><img src='docs/images/interactions_data_examples.png'></a>
 
 <h4 align='left'>Retrieve the interaction within the scenario dataset:</h4>
+
 ```
 python interaction_filter.py --scenario_path int2_dataset_example/scenario/0/010213250706-010213264206.pickle --output_dir
  int2_dataset_example/interaction_scenario/complete_scenario

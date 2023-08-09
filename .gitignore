@@ -1,0 +1,7 @@
+**__pycache__**
+int2_dataset/
+output/visualization/*
+visualization/
+static_time.py
+int2_dataset_example/interaction_scenario/split_scenario/*
+int2_dataset_example/interaction_scenario/complete_scenario/*

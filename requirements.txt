@@ -1,0 +1,21 @@
+# Tsinghua mirror source: https://pypi.tuna.tsinghua.edu.cn/simple/
+# pip install -r requirements.txt
+python=3.8
+Cython==0.29.30
+h5py==3.1.0
+imageio==2.26.0
+ipython==8.11.0
+matplotlib==3.5.1
+numpy==1.21.5
+opencv-python==4.7.0.72
+pandas==1.2.4
+p-tqdm==1.4.0
+tensorflow-gpu==2.6.0
+torch==1.9.0+cu111
+torchvision==0.10.0+cu111
+waymo-open-dataset-tf-2-6-0==1.4.9
+commonroad-all==0.0.1
+commonroad-drivability-checker==2022.1.1
+commonroad-io==2022.1
+commonroad-route-planner==2022.2
+commonroad-vehicle-models==2.0.0

@@ -15,10 +15,8 @@ pip install -r requirements.txt
 **Step 3:** Clone the codebase, and compile this codebase: 
 ```python
 # Clone INT2 codebase
-git clone https://github.com/BJHYZJ/INT2.git
+git clone https://github.com/AIR-DISCOVER/INT2.git
 
-# Compile the customized CUDA codes in INT2 codebase
-python setup.py develop
 ```
 
 Then you are all set.

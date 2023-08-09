@@ -71,3 +71,5 @@ INT2_Dataset/
                         ├──coexistence_time
                         └──interaction_time
 ```
+
+<h4>Please refer to the <a href="https://int2.cn/doc">data documentation</a> for details.</h4>

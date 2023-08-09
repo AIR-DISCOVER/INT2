@@ -1,6 +1,6 @@
 <h1 align="center">INT2: Interactive Trajectory Prediction at Intersections [ICCV-2023]</h1>
 
-![pic1](docs/images/pic1.png)
+<a align="docs/images/pic1.png"><img src="docs/images/pic1.png"></a>
 
 
 <h3 align="center">This is the official repository of the paper <a href='"https://arxiv.org'>INT2: Interactive Trajectory Prediction at Intersections.</a></h3>

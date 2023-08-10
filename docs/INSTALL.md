@@ -20,3 +20,5 @@ git clone https://github.com/AIR-DISCOVER/INT2.git
 ```
 
 Then you are all set.
+
+If you want to use INT2 in MTR, pleas see <a href="START_MTR.md">here</a>, if you want to use INT2 in M2I, pleas see <a href="START_M2I.md">here</a>.

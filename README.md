@@ -80,6 +80,12 @@ python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/in
 <h4 align='left'>We used <a href="https://github.com/Tsinghua-MARS-Lab/M2I">M2I</a> and <a href="https://github.com/sshaoshuai/MTR">MTR</a> as benchmarks for our dataset, and the experimental results can be obtained from <a href="https://github.com/BJHYZJ/INT2forM2I">INT2forM2I</a> and <a href="https://github.com/BJHYZJ/INT2forMTR">INT2forMTR</a>.</h4>
 
 
+<h4 align='left'>Quantitative results of M2I on our INT2 dataset.</h4>
+<a align='center'><img src='docs/images/M2I_result.png'></a>
+
+<h4 align='left'>Quantitative results of M2I on our INT2 dataset.</h4>
+<a align='center'>TODO</a>
+
 ## Citation
 <h4 align='left'>If you find this work useful in your research, please consider cite:</h4>
 

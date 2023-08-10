@@ -84,7 +84,7 @@ python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/in
 <a align='center'><img src='docs/images/M2I_result.png'></a>
 
 <h4 align='left'>Quantitative results of M2I on our INT2 dataset.</h4>
-<a align='center'>TODO</a>
+<a align='center' style="color:red;"><strong>TODO</strong></a>
 
 ## Citation
 <h4 align='left'>If you find this work useful in your research, please consider cite:</h4>

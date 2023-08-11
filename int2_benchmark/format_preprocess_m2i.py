@@ -38,14 +38,16 @@ def format_preprocess(complete_scenario_path):
     state = agent_info['state']
 
     tf_state = traffic_lights_info['tf_state']
-    tf_state_valid = traffic_lights_info['tf_state_valid']
+    # tf_state_valid = traffic_lights_info['tf_state_valid']
     tf_mapping_lane_id = traffic_lights_info['tf_mapping_lane_id']
     
     tf_position = []
     for tf_id in tf_mapping_lane_id:
-        tf_mapping_lane_info = lane_info[tf_id]
-        embed()
+        tf_mapping_lane_info = lane_info[f'{tf_id}']
+        centerline = np.array(tf_mapping_lane_info['centerline'], dtype=np.float64)
+        tf_position.append([centerline[0, 0], centerline[0, 1], 0])
 
+    tf_position = np.array(tf_position)
     '''
     position_x, position_y, position_z, theta, velocity_x, velocity_y, length, width, height, valid
     ''' 
@@ -63,8 +65,9 @@ def format_preprocess(complete_scenario_path):
             inf_idx = 0
             rea_idx = 0
 
-            valid     = state['valid'][:, split_time_91[0]:split_time_91[1] + 1]
+            valid = state['valid'][:, split_time_91[0]:split_time_91[1] + 1]
             agent_valid_idx = np.where(valid.sum(axis=1) != 0)[0]
+        
             agent_num = len(agent_valid_idx)
 
             bbox_yaw        = state['theta'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
@@ -81,6 +84,16 @@ def format_preprocess(complete_scenario_path):
             object_id       = object_id[agent_valid_idx]
             object_type     = object_type[agent_valid_idx]
             object_sub_type = object_sub_type[agent_valid_idx]
+
+
+            # 需要转换一个axis 0 and axis 1
+            tf_id = tf_mapping_lane_id
+            tf_state = tf_state[:, split_time_91[0]:split_time_91[1] + 1]
+            tf_valid = traffic_lights_info['tf_state_valid'][:, split_time_91[0]:split_time_91[1] + 1]
+            tf_x = tf_position[:, ]
+            assert 1 == 0
+            # tf_position     = tf_position
+
 
             for j in range(i + 1, len(interested_agents)):
                 int_1_idx = interested_agents[j]

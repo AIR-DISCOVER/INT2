@@ -95,6 +95,7 @@ python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/in
 ## Citation
 <h4 align='left'>If you find this work useful in your research, please consider cite:</h4>
 
+
 ```
 @article{yan2023int2,
   title={INT2: Interactive Trajectory Prediction at Intersections},

@@ -25,6 +25,12 @@ def format_preprocess(complete_scenario_path):
     with open(split_scenario_path, 'rb+') as f:
         split_scenario_data = pickle.load(f)
     
+    split_path = complete_scenario_path.split('/')
+    data_dir = '/'.join(split_path[:3])
+    hdmap_id = split_path[-2]
+    hdmap_path = os.path.join(data_dir, 'hdmap', hdmap_id + '.json')
+    embed()
+
     agent_info = complete_scenario_data['AGENT_INFO']
     traffic_lights_info = complete_scenario_data['TRAFFIC_LIGHTS_INFO']
     timestame_scenario = complete_scenario_data['TIMESTAMP_SCENARIO'].astype(np.float64)

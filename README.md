@@ -1,7 +1,5 @@
 <h1 align="center">INT2: Interactive Trajectory Prediction at Intersections [ICCV-2023]</h1>
 
-<a align="docs/images/pic1.png"><img src="docs/images/pic1.png"></a>
-
 <p align="center">
 <a href="https://int2.cn/"><img  src="docs/icon/Website-INT2.svg" ></a>
 <a href="https://arxiv.org/"><img  src="docs/icon/arXiv-Paper.svg" ></a>
@@ -18,6 +16,8 @@
 <h4 align="center">
 <a href='https://arxiv.org'>arXiv</a> | <a href='https://int2.cn'>INT2 Website</a> | <a href='https://int2.cn/download'>Dataset Download</a> | <a href='https://youtu.be/KNkuakDvgVc'>Video</a>
 </h4>
+
+<a align="docs/images/pic1.png"><img src="docs/images/pic1.png"></a>
 
 <h4 align='left'>Additionally, the dataset poses an interesting domain mismatch challenge. For each intersection, we treat rush-hour and
 non-rush-hour segments as different domains. Peak time (a, b, c) and trough time (d, e, f).</h4>

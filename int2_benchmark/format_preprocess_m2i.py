@@ -14,6 +14,7 @@ from waymo_open_dataset.protos import scenario_pb2
 from IPython import embed
 from p_tqdm import p_map
 import pickle
+import json
 
 def format_preprocess(complete_scenario_path):   
     split_scenario_path = complete_scenario_path.replace('complete_scenario', 'split_scenario')
@@ -26,11 +27,13 @@ def format_preprocess(complete_scenario_path):
         split_scenario_data = pickle.load(f)
     
     split_path = complete_scenario_path.split('/')
-    data_dir = '/'.join(split_path[:3])
+    data_dir = '/'.join(split_path[:2])
     hdmap_id = split_path[-2]
     hdmap_path = os.path.join(data_dir, 'hdmap', hdmap_id + '.json')
+    with open(hdmap_path, 'r') as f:
+        hdmap_data = json.load(f)
+    lane_info = hdmap_data['LANE']
     embed()
-
     agent_info = complete_scenario_data['AGENT_INFO']
     traffic_lights_info = complete_scenario_data['TRAFFIC_LIGHTS_INFO']
     timestame_scenario = complete_scenario_data['TIMESTAMP_SCENARIO'].astype(np.float64)

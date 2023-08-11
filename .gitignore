@@ -1,5 +1,7 @@
 **__pycache__**
-int2_dataset/
+int2_dataset/hdmap
+int2_dataset/scenario
+int2_dataset/interaction_scenario
 output/visualization/*
 visualization/
 static_time.py

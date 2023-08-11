@@ -3,14 +3,9 @@
 # Written by Zhijie Yan
 # All Rights Reserved
 
-import sys, os
+import os
 import numpy as np
 import pickle
-import tensorflow as tf
-import multiprocessing
-import glob
-from tqdm import tqdm
-from waymo_open_dataset.protos import scenario_pb2
 from IPython import embed
 from p_tqdm import p_map
 import pickle
@@ -33,7 +28,7 @@ def format_preprocess(complete_scenario_path):
     with open(hdmap_path, 'r') as f:
         hdmap_data = json.load(f)
     lane_info = hdmap_data['LANE']
-    embed()
+    
     agent_info = complete_scenario_data['AGENT_INFO']
     traffic_lights_info = complete_scenario_data['TRAFFIC_LIGHTS_INFO']
     timestame_scenario = complete_scenario_data['TIMESTAMP_SCENARIO'].astype(np.float64)
@@ -46,6 +41,11 @@ def format_preprocess(complete_scenario_path):
     tf_state_valid = traffic_lights_info['tf_state_valid']
     tf_mapping_lane_id = traffic_lights_info['tf_mapping_lane_id']
     
+    tf_position = []
+    for tf_id in tf_mapping_lane_id:
+        tf_mapping_lane_info = lane_info[tf_id]
+        embed()
+
     '''
     position_x, position_y, position_z, theta, velocity_x, velocity_y, length, width, height, valid
     ''' 

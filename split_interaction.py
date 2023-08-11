@@ -42,7 +42,6 @@ def split_interaction(interaction_scenario_path, out_dir):
     velocity_y = state['velocity_y']
     INTERACTION_INFO = interaciton_scenario_info['INTERACTION_INFO']
     
-
     interaction_pair_info = INTERACTION_INFO['interaction_pair_info']
     interaction_info_new = {}
     n = 0
@@ -161,7 +160,6 @@ def split_interaction(interaction_scenario_path, out_dir):
         f.write(pickle.dumps(result))
 
     # print(output_path)
-
 
 def main():
     args = parse_config()

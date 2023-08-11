@@ -2,7 +2,13 @@
 
 <a align="docs/images/pic1.png"><img src="docs/images/pic1.png"></a>
 
-
+<p align="center">
+<a href="https://int2.cn/"><img  src="docs/icon/Website-INT2.svg" ></a>
+<a href="https://arxiv.org/"><img  src="docs/icon/arXiv-Paper.svg" ></a>
+<a href="https://arxiv.org/"><img  src="docs/icon/publication-Paper.svg" ></a>
+<a href="https://github.com/AIR-DISCOVER/INT2/blob/main/LICENSE"><img  src="docs/icon/license-MIT.svg"></a>
+<a href="https://youtu.be/KNkuakDvgVc"><img  src="docs/icon/youtube-demo.svg"></a>
+</p>
 <h3 align="center">This is the official repository of the paper <a href='"https://arxiv.org'>INT2: Interactive Trajectory Prediction at Intersections.</a></h3>
 
 <h4 align="center"><em><a href="https://github.com/BJHYZJ">Zhijie Yan</a>, Pengfei Li, Zheng Fu, Shaocong Xu, Yongliang Shi, Xiaoxue Chen, Yuhang Zheng, Yang Li, Tianyu Liu, Chuxuan Li, Nairui Luo, Xu Gao, Yilun Chen, Zuoxu Wang, Yifeng Shi, Pengfei Huang, Zhengxiao Han, Jirui Yuan, Jiangtao Gong, Guyue Zhou, <a href="https://hangzhaomit.github.io/">Hang Zhao</a>, <a href="https://sites.google.com/view/fromandto">Hao Zhao</a></em></h4>
@@ -10,7 +16,7 @@
 <h5 align="center">Sponsored by Baidu Inc. through <a href="https://www.apollo.auto/">Apollo</a>-<a href="https://air.tsinghua.edu.cn/en/">AIR</a> Joint Research Center.</h5>
 
 <h4 align="center">
-<a href='https://arxiv.org'>arXiv</a> | <a href='https://int2.cn'>INT2 Website</a> | <a href='https://int2.cn/download'>Dataset Download</a>
+<a href='https://arxiv.org'>arXiv</a> | <a href='https://int2.cn'>INT2 Website</a> | <a href='https://int2.cn/download'>Dataset Download</a> | <a href='https://youtu.be/KNkuakDvgVc'>Video</a>
 </h4>
 
 <h4 align='left'>Additionally, the dataset poses an interesting domain mismatch challenge. For each intersection, we treat rush-hour and

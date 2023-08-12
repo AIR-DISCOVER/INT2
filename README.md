@@ -82,6 +82,13 @@ python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/in
 
 <h4 align='left'>Multiple XML files, visualization images, and videos with a length of 9.1 seconds will be saved by default in the output/visualization folder.</h4>
 
+## Calculate Collision
+<h4 align="center">We report collision rates so that they function as baselines for potential trajectory generation (instead of trajectory forecasting) applications. Generated trajectories should be as collision-free as possible, under the criteria mentioned above. To calculate collision: </h4>
+
+```
+python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/010213250706-010213264206.pickle --hdmap_dir int2_dataset_example/hdmap
+```
+
 ## Benchmark
 <h4 align='left'>We used <a href="https://github.com/Tsinghua-MARS-Lab/M2I">M2I</a> and <a href="https://github.com/sshaoshuai/MTR">MTR</a> as benchmarks for our dataset, and the experimental results can be obtained from <a href="https://github.com/BJHYZJ/INT2forM2I">INT2forM2I</a> and <a href="https://github.com/BJHYZJ/INT2forMTR">INT2forMTR</a>.</h4>
 

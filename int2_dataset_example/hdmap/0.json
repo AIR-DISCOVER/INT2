@@ -13759,9 +13759,7 @@
             "predecessors": [
                 62317751611
             ],
-            "successors": [
-                62317814314
-            ],
+            "successors": [],
             "centerline": [
                 [
                     63.87729827099247,
@@ -32312,9 +32310,7 @@
             "left_neighbor_id": [
                 62317814312
             ],
-            "right_neighbor_id": [
-                62317814314
-            ],
+            "right_neighbor_id": [],
             "predecessors": [
                 62317751213
             ],

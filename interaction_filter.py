@@ -28,7 +28,7 @@ from utils.interaction_utils import *
 
 def parse_config():
     parser = argparse.ArgumentParser(description='INT2 Dataset Interaction Filter Visualization.')
-    parser.add_argument('--scenario_path', type=str, default='int2_dataset_example/scenario/0/010213250706-010213264206.pickle',
+    parser.add_argument('--scenario_path', type=str, default='int2_dataset_example/scenario/8/010213355106-010213364106.pickle',
                          help='The scenario path to be visualized')
     parser.add_argument('--output_dir', type=str, default='int2_dataset_example/interaction_scenario/complete_scenario', help='')
     args = parser.parse_args()

@@ -103,7 +103,7 @@ python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/01
 
 
 <h4 align='left'>Quantitative results of M2I on our INT2 dataset.</h4>
-<a align='center'><img src='docs/images/M2I_result.png'></a>
+<a align='center'><img src='docs/images/model_results.png'></a>
 
 <h4 align='left'>Quantitative results of M2I on our INT2 dataset.</h4>
 <a align='center' style="color:red;"><strong>TODO</strong></a>

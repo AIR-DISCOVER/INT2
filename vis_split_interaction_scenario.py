@@ -21,14 +21,14 @@ from utils.vis_utils import scenario2xml, xml2video_split
 
 def parse_config():
     parser = argparse.ArgumentParser(description='INT2 Dataset Split Data Visualization.')
-    parser.add_argument('--scenario_path', type=str, default='int2_dataset/interaction_scenario/complete_scenario/0/010213250706-010213264206.pickle',
+    parser.add_argument('--scenario_path', '--s', type=str, default='int2_dataset_example/interaction_scenario/complete_scenario/8/010213355106-010213364106.pickle',
                          help='The scenario path to be visualized')
     parser.add_argument('--output_dir', type=str, default='output/visualization', help='')
     parser.add_argument('--hdmap_dir', type=str, default='int2_dataset/hdmap', help='')
     parser.add_argument('--tf_complete_id_path', type=str, default='config/tf_complete_id.json', 
                         help='The complete road ID controlled by the traffic light')
     parser.add_argument('--video_len', type=int, default=None, help='')
-    parser.add_argument('--split_interaction_scenario_dir', type=str, default='int2_dataset/interaction_scenario/split_scenario', 
+    parser.add_argument('--split_interaction_scenario_dir', type=str, default='int2_dataset_example/interaction_scenario/split_scenario', 
                         help='The folder where the complete scene interaction information is located')
     args = parser.parse_args()
 
@@ -64,7 +64,7 @@ def main():
         hdmap_path, args.scenario_path, xml_output_path)
 
     xml2video_split(xml_output_path_new, video_output_path, MAP_RANGE, LANE, STOPLINE, 
-            CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO, tf_complete_id_map_info, video_len=args.video_len, split_interaction_info=split_interaction_info)
+            CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO, tf_complete_id_map_info, video_len=args.video_len, delete_img=False, split_interaction_info=split_interaction_info)
 
 
 def multi_process():
@@ -95,12 +95,12 @@ def multi_process():
             tf_complete_id_map_info = tf_complete_id_dict[hdmap_id]
             with open(file_path, 'rb+') as f:
                 split_interaction_info = pickle.load(f)
-            embed()
+
             xml_output_path_new, MAP_RANGE, LANE, STOPLINE, CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO = scenario2xml(
                 hdmap_path, complete_path, xml_output_path)
             
             xml2video_split(xml_output_path_new, video_output_path, MAP_RANGE, LANE, STOPLINE, 
-                CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO, tf_complete_id_map_info, video_len=None, split_interaction_info=split_interaction_info)
+                CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO, tf_complete_id_map_info, video_len=None, delete_img=False, split_interaction_info=split_interaction_info)
 
 if __name__ == "__main__":
     main()

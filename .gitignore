@@ -11,3 +11,5 @@ int2_benchmark/MTR
 int2_benchmark/M2I
 divide_time.py
 process_rush_non_rush.py
+int2_dataset/non_rush_hour1.txt
+int2_dataset/rush_hour1.txt

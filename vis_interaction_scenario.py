@@ -21,7 +21,7 @@ from utils.vis_utils import scenario2xml, xml2video
 
 def parse_config():
     parser = argparse.ArgumentParser(description='INT2 Dataset Visualization.')
-    parser.add_argument('--scenario_path', type=str, default='int2_dataset/interaction_scenario/complete_scenario/0/010213250706-010213264206.pickle',
+    parser.add_argument('--scenario_path', type=str, default='int2_dataset_example/interaction_scenario/complete_scenario/8/010213355106-010213364106.pickle',
                          help='The scenario path to be visualized')
     parser.add_argument('--output_dir', type=str, default='output/visualization', help='')
     parser.add_argument('--hdmap_dir', type=str, default='int2_dataset/hdmap', help='')
@@ -63,7 +63,7 @@ def main():
         hdmap_path, args.scenario_path, xml_output_path)
 
     xml2video(xml_output_path_new, video_output_path, MAP_RANGE, LANE, STOPLINE, 
-              CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO, tf_complete_id_map_info, video_len=args.video_len, interested_agents=interested_agents)
+              CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO, tf_complete_id_map_info, video_len=args.video_len, delete_img=False, interested_agents=interested_agents)
 
 
 if __name__ == "__main__":

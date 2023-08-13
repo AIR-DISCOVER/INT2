@@ -34,7 +34,6 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 <a align='center'><img src='docs/images/teaser.png'></a>
 
 
-<br>
 <hr>
 
 <h3><strong><i>🚀 News</i></strong></h3>

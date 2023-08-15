@@ -8,8 +8,7 @@ visualization/
 static_time.py
 int2_dataset_example/interaction_scenario/split_scenario/*
 int2_dataset_example/interaction_scenario/complete_scenario/*
-int2_benchmark/MTR
-int2_benchmark/M2I
+# int2_benchmark/M2I
 divide_time.py
 process_rush_non_rush.py
 int2_dataset/non_rush_hour1.txt

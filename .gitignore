@@ -2,6 +2,7 @@
 int2_dataset/hdmap
 int2_dataset/scenario
 int2_dataset/interaction_scenario
+int2_dataset/m2i_format
 output/visualization/*
 visualization/
 static_time.py
@@ -13,3 +14,8 @@ divide_time.py
 process_rush_non_rush.py
 int2_dataset/non_rush_hour1.txt
 int2_dataset/rush_hour1.txt
+int2_benchmark/M2I/src/build
+int2_benchmark/M2I/src/utils_cython.c
+int2_benchmark/M2I/src/utils_cython.cpython-38-x86_64-linux-gnu.so
+int2_benchmark/M2I/src/utils_cython.html
+int2_benchmark/MTR/*

@@ -1,4 +1,4 @@
-# INT2: INT2: Interactive Trajectory Prediction at Intersections
+# INT2: Interactive Trajectory Prediction at Intersections
 # Published at ICCV 2023
 # Written by Zhijie Yan
 # All Rights Reserved

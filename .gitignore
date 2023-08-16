@@ -19,3 +19,4 @@ int2_benchmark/M2I/src/utils_cython.cpython-38-x86_64-linux-gnu.so
 int2_benchmark/M2I/src/utils_cython.html
 int2_benchmark/MTR/*
 int2_benchmark/M2I/output/*
+int2_benchmark/M2I/scripts/vis.sh

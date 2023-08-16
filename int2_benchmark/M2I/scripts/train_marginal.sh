@@ -3,7 +3,7 @@
 
 ## train rush_hour with all type
 DATA_TXT=./domain/rush_hour_train.txt; \
-OUTPUT_DIR=../output/rush_hour/marginal; \
+OUTPUT_DIR=../output/train/rush_hour/marginal; \
 HDMAP_DIR='../../../int2_dataset/m2i_format/hdmap'
 AGENT_TYPE=vehicle; \
 CUDA_VISIBLE_DEVICES=1,2,5,6 python -m src.run --do_train --waymo \
@@ -19,7 +19,7 @@ CUDA_VISIBLE_DEVICES=1,2,5,6 python -m src.run --do_train --waymo \
 
 ## train non_rush_hour with all type
 DATA_TXT=./domain/non_rush_hour_train.txt; \
-OUTPUT_DIR=../output/non_rush_hour/marginal; \
+OUTPUT_DIR=../output/train/non_rush_hour/marginal; \
 HDMAP_DIR='../../../int2_dataset/m2i_format/hdmap'
 AGENT_TYPE=vehicle; \
 CUDA_VISIBLE_DEVICES=1,2,5,6 python -m src.run --do_train --waymo \

@@ -1,3 +1,8 @@
+# INT2: Interactive Trajectory Prediction at Intersections
+# Published at ICCV 2023
+# Written by Zhijie Yan
+# All Rights Reserved
+
 import numpy as np
 from commonroad.common.file_reader import CommonRoadFileReader
 from commonroad.geometry.shape import Polygon, ShapeGroup

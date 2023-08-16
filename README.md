@@ -131,6 +131,6 @@ python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/01
 
 
 ## Reference
-Waymo open motion dataset: <a href="https://github.com/waymo-research/waymo-open-dataset">https://github.com/waymo-research/waymo-open-dataset</a>
-M2I: <a href="https://github.com/Tsinghua-MARS-Lab/M2I">https://github.com/Tsinghua-MARS-Lab/M2I</a>
-MTR: <a href="https://github.com/sshaoshuai/MTR">https://github.com/sshaoshuai/MTR</a>
+- Waymo open motion dataset: <a href="https://github.com/waymo-research/waymo-open-dataset">https://github.com/waymo-research/waymo-open-dataset</a>
+- M2I: <a href="https://github.com/Tsinghua-MARS-Lab/M2I">https://github.com/Tsinghua-MARS-Lab/M2I</a>
+- MTR: <a href="https://github.com/sshaoshuai/MTR">https://github.com/sshaoshuai/MTR</a>

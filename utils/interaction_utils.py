@@ -7,7 +7,6 @@ import math
 import numpy as np
 from math import sqrt
 import matplotlib.path as mpath
-from IPython import embed
 
 delta_d = 2.5
 delta_move_d = 5

@@ -3,20 +3,12 @@
 # Written by Zhijie Yan
 # All Rights Reserved
 
-import numpy as np
-import os
-import json
-from math import sqrt
-from commonroad.common.file_reader import CommonRoadFileReader
-from commonroad.visualization.mp_renderer import MPRenderer
-import matplotlib.pyplot as plt
-from IPython import embed
-import pickle
-import cv2
 import warnings
 import argparse
+import os
+import json
+import pickle
 warnings.filterwarnings("ignore")
-from tqdm import tqdm
 from utils.vis_utils import scenario2xml, xml2video_split
 
 def parse_config():

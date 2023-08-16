@@ -1,3 +1,8 @@
+# INT2: INT2: Interactive Trajectory Prediction at Intersections
+# Published at ICCV 2023
+# Written by Zhijie Yan
+# All Rights Reserved
+
 import math
 import os
 import pickle
@@ -14,9 +19,8 @@ from collections import defaultdict
 import tensorflow as tf
 Normalizer = utils.Normalizer
 from enum import IntEnum
+import matplotlib.pyplot as plt
 from IPython import embed
-
-tqdm = partial(tqdm, dynamic_ncols=True)
 
 
 loading_summary = {
@@ -30,7 +34,6 @@ loading_summary = {
 
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, args, batch_size, rank=0, to_screen=True):
-        # self.loader = WaymoDL(args.data_dir[0])
         self.args = args
         self.rank = rank
         self.world_size = args.distributed_training if args.distributed_training else 1
@@ -60,12 +63,6 @@ class Dataset(torch.utils.data.Dataset):
             # return int(500_000 * 0.15 * 2 / self.world_size)
             return int(10000 / self.world_size)
         else:
-            # 除以长度之后就是在除以batch size之后的数据长度，每个设备中这个长度都是一样的 10937
-            # 左边数据的长度就是多张卡总共要跑完的数据量
-            
-            # 500_000 for vv
-            # 300_000 for vc
-            # 200_000 for vp
             return int(20000 * 0.7 / self.batch_size)
             # return int(500_000 * 0.7 / self.batch_size) 
 
@@ -128,7 +125,7 @@ class Dataset(torch.utils.data.Dataset):
         if 'raster' in args.other_params and args.do_train:
             if expected_len > 500 * 10:
                 expected_len = expected_len // 2
-
+        
         assert expected_len >= self.batch_size
 
         while len(self.ex_list) < expected_len:
@@ -152,7 +149,7 @@ def get_ex_list_from_file(file_name, args: utils.Args, trajectory_type_2_ex_list
     # for step, data in enumerate(dataset):
     for step in range(len(dataset)):
         # inputs, decoded_example = _parse(data)
-        inputs, decoded_example = _parse(dataset[step])
+        inputs, decoded_example = _parse(dataset[step], args.hdmap_dir)
         
         # get predict_agent_num
         sample_is_valid = inputs['sample_is_valid']
@@ -214,7 +211,6 @@ def get_ex_list_from_file(file_name, args: utils.Args, trajectory_type_2_ex_list
 
         # if step > 200:
         #     break
-
     return ex_list
 
 
@@ -225,7 +221,6 @@ def extract_from_inputs(inputs, decoded_example, args, select, idx_in_K):
     tracks_to_predict = inputs['tracks_to_predict'][sample_is_valid]
     tracks_type = decoded_example['state/type'][sample_is_valid]
     objects_id = decoded_example['state/id'][sample_is_valid]
-
 
     scenario_id = decoded_example['scenario/id'] + '_' + str(int(decoded_example['state/id'][0])) + '_' + str(int(decoded_example['state/id'][1])) + '_' + str(np.array(decoded_example['state/current/timestamp_micros'][0])[0])
 
@@ -251,7 +246,7 @@ def extract_from_inputs(inputs, decoded_example, args, select, idx_in_K):
         'idx_in_K': idx_in_K,
     } if args.do_eval else None
 
-    gt_trajectory = gt_trajectory.copy()
+    gt_trajectory = gt_trajectory.copy().astype(np.float32)
     gt_future_is_valid = gt_future_is_valid.copy()
     tracks_to_predict = tracks_to_predict.copy()
     tracks_type = tracks_type.copy().reshape(-1)
@@ -269,6 +264,7 @@ def extract_from_inputs(inputs, decoded_example, args, select, idx_in_K):
     when prediction conditional, the number of predict agent num always is 2.
     
     '''
+
     for i in range(predict_agent_num):
         assert tracks_to_predict[i]
     assert len(gt_trajectory) == len(gt_future_is_valid) == len(tracks_type)
@@ -317,63 +313,56 @@ def get_instance(args: utils.Args, inputs, decoded_example, file_name,
                 return None
             loading_summary['scenarios_in_traj_pred'] += 1
         # load relation
-        if args.relation_file_path is not None:
-            if args.do_test:
-                # when predicting against test dataset, dummify the interaction_label for computing relation error
-                interaction_label = 0
+        if args.do_test:
+            # when predicting against test dataset, dummify the interaction_label for computing relation error
+            interaction_label = 0
+        else:
+            relation = decoded_example['relation']
+
+            if relation is None:
+                return None
+            # assert len(relation) == 4, "Relation data should include 4 elements."
+            # [id1, id2, label, relation_type].
+            # id1 always influencer, id2 always reactor
+            # interaction_label: 1 - bigger id agent dominant, 0 - smaller id agent dominant, 2 - no relation
+            # agent_pair_label: 1 - v2v, 2 - v2p, 3 - v2c, 4 - others
+            id1, id2, interaction_label, agent_pair_label = relation[:4]
+            
+            # Regardless of training vv vc or vp, train in the form of vv
+            agent_pair_label = 1
+            
+            # You can only train one type or all types
+            if 'pair_vv' in args.other_params:
+                # Train with v2v data
+                if agent_pair_label != 1:
+                    return None
+            elif 'pair_vp' in args.other_params:
+                # Train with v2p data
+                if agent_pair_label != 2:
+                    return None
+            elif 'pair_vc' in args.other_params:
+                # Train with v2c data
+                if agent_pair_label != 3:
+                    # return None
+                    pass
+            elif 'pair_others' in args.other_params:
+                # Train with other type data
+                if agent_pair_label != 4:
+                    return None
+                
+            # You can train with two additional modes
+            if 'binary_is_two' in args.other_params:
+                interaction_label = 0 if interaction_label < 2 else 1
+            if '0and1' in args.other_params and interaction_label == 2:
+                return None
+            if interaction_label == 2:
+                # in label 2, the ids are from previous scenario
+                id1 = id2 = None
             else:
-                # if globals.interactive_relations is None:
-                #     print("loading relation gt from: ", args.relation_file_path)
-                #     # globals.interactive_relations = structs.load(args.relation_file_path)
-                #     globals.interactive_relations = {'yizhuang#1/1650251580.01-1650251760.00': np.array([1535178, 1535205, 0, 1])}
-                #     print("loading finished")
-                # interactive_relations = globals.interactive_relations
-                # relation = utils.load_scenario_from_dictionary(interactive_relations, scenario_id)
-                relation = decoded_example['relation']
+                id1 = int(id1)
+                id2 = int(id2)
 
-                if relation is None:
-                    return None
-                # assert len(relation) == 4, "Relation data should include 4 elements."
-                # [id1, id2, label, relation_type].
-                # id1 always influencer, id2 always reactor
-                # interaction_label: 1 - bigger id agent dominant, 0 - smaller id agent dominant, 2 - no relation
-                # agent_pair_label: 1 - v2v, 2 - v2p, 3 - v2c, 4 - others
-                id1, id2, interaction_label, agent_pair_label = relation[:4]
-                
-                # 无论训练vv vc 还是 vp，都以vv的形式来训练
-                agent_pair_label = 1
-                
-                # You can only train one type or all types
-                if 'pair_vv' in args.other_params:
-                    # Train with v2v data
-                    if agent_pair_label != 1:
-                        return None
-                elif 'pair_vp' in args.other_params:
-                    # Train with v2p data
-                    if agent_pair_label != 2:
-                        return None
-                elif 'pair_vc' in args.other_params:
-                    # Train with v2c data
-                    if agent_pair_label != 3:
-                        # return None
-                        pass
-                elif 'pair_others' in args.other_params:
-                    # Train with other type data
-                    if agent_pair_label != 4:
-                        return None
-                # You can train with two additional modes
-                if 'binary_is_two' in args.other_params:
-                    interaction_label = 0 if interaction_label < 2 else 1
-                if '0and1' in args.other_params and interaction_label == 2:
-                    return None
-                if interaction_label == 2:
-                    # in label 2, the ids are from previous scenario
-                    id1 = id2 = None
-                else:
-                    id1 = int(id1)
-                    id2 = int(id2)
-
-                loading_summary['scenarios_in_relation_gt'] += 1
+            loading_summary['scenarios_in_relation_gt'] += 1
         
         if 'direct_relation_label' in args.other_params:
             assert args.direct_relation_path is not None, f'pass direct relation file path to use'
@@ -790,7 +779,6 @@ def get_instance(args: utils.Args, inputs, decoded_example, file_name,
         mapping['final_idx'] = eval_time - 1
 
     # test_vis(trajs, lanes, labels)
-    # embed(header='111')
     if args.visualize:
         mapping.update({
             'trajs': trajs,
@@ -822,7 +810,6 @@ def get_instance(args: utils.Args, inputs, decoded_example, file_name,
     return mapping
 
 def test_vis(trajs, lanes, labels):
-    import matplotlib.pyplot as plt
     plt.cla()
     fig = plt.figure(0, figsize=(45, 38))
 
@@ -890,7 +877,9 @@ def get_interest_objects(decoded_example, sample_is_valid, gt_future_is_valid, t
     objects_of_interest = objects_of_interest.copy()
     # objects_of_interest = tf.boolean_mask(decoded_example['state/objects_of_interest'], sample_is_valid)
     # objects_of_interest = objects_of_interest.numpy().copy()
-    assert objects_of_interest.dtype == np.int64
+
+    if objects_of_interest.dtype != np.int64:
+        objects_of_interest = objects_of_interest.astype(np.int64)
     assert len(objects_of_interest.shape) == 1
 
     if objects_of_interest.sum() < 2:

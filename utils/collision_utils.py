@@ -3,19 +3,15 @@ from commonroad.common.file_reader import CommonRoadFileReader
 from commonroad.geometry.shape import Polygon, ShapeGroup
 from commonroad.scenario.obstacle import StaticObstacle, ObstacleType,DynamicObstacle
 from commonroad.scenario.scenario import Scenario
-from commonroad.scenario.trajectory import State as StateTupleFactory, Trajectory, State
+from commonroad.scenario.trajectory import State as StateTupleFactory
 from commonroad_dc.pycrcc import CollisionChecker
 from commonroad_dc.boundary import construction
 from commonroad_dc.collision.collision_detection.pycrcc_collision_dispatch import create_collision_object, create_collision_checker
-import matplotlib.pyplot as plt
 import numpy as np
 import Polygon.Utils
-from commonroad.visualization.mp_renderer import MPRenderer
-from commonroad.geometry.shape import Polygon, ShapeGroup, Rectangle
+from commonroad.geometry.shape import Polygon, ShapeGroup
 from commonroad.scenario.obstacle import StaticObstacle, ObstacleType
 from commonroad.scenario.scenario import Scenario
-from commonroad.scenario.trajectory import State
-from IPython import embed
 
 def construct_boundary_checker(scenario: Scenario) -> CollisionChecker:
     build =  ['section_triangles', 'triangulation']#['simple_triangles']

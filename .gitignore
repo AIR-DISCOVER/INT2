@@ -8,13 +8,14 @@ visualization/
 static_time.py
 int2_dataset_example/interaction_scenario/split_scenario/*
 int2_dataset_example/interaction_scenario/complete_scenario/*
-# int2_benchmark/M2I
 divide_time.py
 process_rush_non_rush.py
 int2_dataset/non_rush_hour1.txt
 int2_dataset/rush_hour1.txt
 int2_benchmark/M2I/src/build
+int2_benchmark/M2I/src/domain/*
 int2_benchmark/M2I/src/utils_cython.c
 int2_benchmark/M2I/src/utils_cython.cpython-38-x86_64-linux-gnu.so
 int2_benchmark/M2I/src/utils_cython.html
 int2_benchmark/MTR/*
+int2_benchmark/M2I/output/*

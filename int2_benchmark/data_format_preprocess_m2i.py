@@ -6,11 +6,11 @@
 import os
 import numpy as np
 import pickle
-from IPython import embed
 from p_tqdm import p_map
 import pickle
 import json
 import copy
+from IPython import embed
 
 tf_state_match = {
     0: 4,
@@ -65,8 +65,8 @@ def scenario_format_preprocess(complete_scenario_path, output_dir):
         try:
             split_scenario_data = pickle.load(f)
         except:
-            with open(os.path.join(output_dir, 'error.txt'), 'a') as e_f:
-                e_f.write(f'{complete_scenario_path}\n')
+            # with open(os.path.join(output_dir, 'error.txt'), 'a') as e_f:
+            #     e_f.write(f'{complete_scenario_path}\n')
             return
 
     split_path = complete_scenario_path.split('/')
@@ -80,7 +80,7 @@ def scenario_format_preprocess(complete_scenario_path, output_dir):
     
     agent_info = complete_scenario_data['AGENT_INFO']
     traffic_lights_info = complete_scenario_data['TRAFFIC_LIGHTS_INFO']
-    timestame_scenario = complete_scenario_data['TIMESTAMP_SCENARIO'].astype(np.float64)
+    timestame_scenario = complete_scenario_data['TIMESTAMP_SCENARIO'].astype(np.float32)
     scenario_id = complete_scenario_data['SCENARIO_ID']
     object_id = agent_info['object_id']
     object_type = agent_info['object_type']
@@ -92,7 +92,7 @@ def scenario_format_preprocess(complete_scenario_path, output_dir):
     tf_position = []
     for tf_id in tf_mapping_lane_id:
         tf_mapping_lane_info = lane_info[f'{tf_id}']
-        centerline = np.array(tf_mapping_lane_info['centerline'], dtype=np.float64)
+        centerline = np.array(tf_mapping_lane_info['centerline'], dtype=np.float32)
         tf_position.append([centerline[0, 0], centerline[0, 1], 0])
 
     tf_position = np.array(tf_position)
@@ -107,20 +107,20 @@ def scenario_format_preprocess(complete_scenario_path, output_dir):
 
         valid = state['valid'][:, split_time_91[0]:split_time_91[1] + 1]
         agent_valid_idx = np.where(valid.sum(axis=1) != 0)[0]
-
+        valid = valid[agent_valid_idx]
         agent_num = len(agent_valid_idx)
 
-        bbox_yaw        = state['theta'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        x               = state['position_x'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        y               = state['position_y'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        z               = state['position_z'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        h               = state['height'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        w               = state['width'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        l               = state['height'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        v_x             = state['velocity_x'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        v_y             = state['velocity_y'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx]
-        vel_way         = np.arctan(v_y / (v_x + 1e-9))
-        timestame       = timestame_scenario[split_time_91[0]:split_time_91[1] + 1]
+        bbox_yaw        = state['theta'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        x               = state['position_x'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        y               = state['position_y'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        z               = state['position_z'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        h               = state['height'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        w               = state['width'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        l               = state['height'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        v_x             = state['velocity_x'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        v_y             = state['velocity_y'][:, split_time_91[0]:split_time_91[1] + 1][agent_valid_idx].astype(np.float32)
+        vel_way         = np.arctan(v_y / (v_x + 1e-9)).astype(np.float32)
+        timestame       = timestame_scenario[split_time_91[0]:split_time_91[1] + 1].astype(np.float32)
         object_id_new       = object_id[agent_valid_idx]
         object_type_new     = np.array([agent_type_match[a_type] for a_type in object_type[agent_valid_idx]])
         object_sub_type_new = np.array([agent_sub_type_match[a_sub_type] for a_sub_type in object_sub_type[agent_valid_idx]])
@@ -134,12 +134,12 @@ def scenario_format_preprocess(complete_scenario_path, output_dir):
             for tf_idx1 in range(tf_valid.shape[1]):
                 tf_state_new[tf_idx0, tf_idx1] = tf_state_match[tf_state[tf_idx0, tf_idx1]] if tf_valid[tf_idx0, tf_idx1] else -1
 
-        tf_m2i_id    = np.array(tf_id)[np.newaxis, :].repeat(91, axis=0)
-        tf_m2i_state = np.transpose(tf_state_new, [1, 0])
-        tf_m2i_valid = np.transpose(tf_valid, [1, 0])
-        tf_m2i_x     = tf_position[:, 0][np.newaxis, :].repeat(91, axis=0)
-        tf_m2i_y     = tf_position[:, 1][np.newaxis, :].repeat(91, axis=0)
-        tf_m2i_z     = tf_position[:, 2][np.newaxis, :].repeat(91, axis=0)
+        tf_m2i_id    = np.array(tf_id)[np.newaxis, :].repeat(91, axis=0).astype(np.int32)
+        tf_m2i_state = np.transpose(tf_state_new, [1, 0]).astype(np.int32)
+        tf_m2i_valid = np.transpose(tf_valid, [1, 0]).astype(np.int32)
+        tf_m2i_x     = tf_position[:, 0][np.newaxis, :].repeat(91, axis=0).astype(np.float32)
+        tf_m2i_y     = tf_position[:, 1][np.newaxis, :].repeat(91, axis=0).astype(np.float32)
+        tf_m2i_z     = tf_position[:, 2][np.newaxis, :].repeat(91, axis=0).astype(np.float32)
 
         timestamp_micros = timestame[np.newaxis, :].repeat(agent_num, axis=0)
 
@@ -223,9 +223,9 @@ def scenario_format_preprocess(complete_scenario_path, output_dir):
                         rea_idx = int_i_idx
                         relation_id = 1
 
-                objects_of_interest = 0 * np.ones((agent_num), dtype=np.int32)
-                tracks_to_predict = 0 * np.ones((agent_num), dtype=np.int32)
-                is_sdc = 0 * np.ones((agent_num), dtype=np.int32)
+                objects_of_interest = 0 * np.ones((agent_num), dtype=np.int64)
+                tracks_to_predict = 0 * np.ones((agent_num), dtype=np.int64)
+                is_sdc = 0 * np.ones((agent_num), dtype=np.int64)
                 
                 objects_of_interest[inf_idx] = 1
                 objects_of_interest[rea_idx] = 1
@@ -241,6 +241,23 @@ def scenario_format_preprocess(complete_scenario_path, output_dir):
                 decoded_example_new['scenario/id'] = f'{scenario_id}-{i}-{j}'
                 decoded_example_new['scenario/map_id'] = hdmap_id
                 
+                for k, v in decoded_example_new.items():
+                    if k.split('/')[0] == 'state':
+                        if len(v.shape) == 2:
+                            decoded_example_new[k][[inf_idx, 0], :] = v[[0, inf_idx], :]
+                            if rea_idx == 0:
+                                temp_reactor_idx = inf_idx
+                            else:
+                                temp_reactor_idx = rea_idx
+                            decoded_example_new[k][[temp_reactor_idx, 1], :] = v[[1,temp_reactor_idx], :]
+                        else:
+                            decoded_example_new[k][[inf_idx, 0]] = v[[0, inf_idx]]
+                            if rea_idx == 0:
+                                temp_reactor_idx = inf_idx
+                            else:
+                                temp_reactor_idx = rea_idx
+                            decoded_example_new[k][[temp_reactor_idx, 1]] = v[[1, temp_reactor_idx]]
+
                 res_decoded_example = {}
                 for k, v in decoded_example_new.items():
                     if 'state' in k.split('/')[0]:
@@ -292,8 +309,9 @@ def hdmap_format_preprocess(hdmap_path, hdmap_output_dir):
     lane_xyz = -1 * np.ones((len(lane_xyz_list), 3), dtype=np.float32)
     lane_xyz[:, :2] = np.array(lane_xyz_list, dtype=np.float32)
     lane_dir = np.zeros((len(lane_xyz), 3), dtype=np.float32)
-    lane_type = np.array(lane_type, dtype=np.float32)
-    lane_valid = np.ones((len(lane_id), 1), dtype=np.int64)
+    lane_type = np.array(lane_type, dtype=np.int32)
+    lane_valid = np.ones((len(lane_id), 1), dtype=np.int32)
+    lane_id = np.array(lane_id, dtype=np.int32)
 
     for i in range(len(lane_xyz)):
         if i > 0: 
@@ -336,6 +354,8 @@ def main():
     for scenario_dir in scenario_dirs:
         complete_scenario_path_list = [os.path.join(scenario_dir, f) for f in os.listdir(scenario_dir)]
         scenario_output_dir_list = [scenario_output_dir] * len(complete_scenario_path_list)
+
+        # scenario_format_preprocess(complete_scenario_path_list[0], scenario_output_dir_list[0])
         p_map(scenario_format_preprocess, complete_scenario_path_list[:100], scenario_output_dir_list[:100], num_cpus=0.2)
 
 if __name__ == "__main__":

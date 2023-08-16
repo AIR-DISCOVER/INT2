@@ -8,8 +8,6 @@ from ..modeling.decoder import Decoder, DecoderResCat
 from ..modeling.lib import MLP, GlobalGraph, LayerNorm, SubGraph, CrossAttention, GlobalGraphRes
 from .. import utils
 
-from IPython import embed
-
 class RelationNetwork(nn.Module):
     """docstring for RelationNetwork"""
 

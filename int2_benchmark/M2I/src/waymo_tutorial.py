@@ -1,92 +1,29 @@
 import numpy as np
 import tensorflow as tf
-
+import os
+import pickle
 from google.protobuf import text_format
 from waymo_open_dataset.metrics.ops import py_metrics_ops
 from waymo_open_dataset.metrics.python import config_util_py as config_util
 from waymo_open_dataset.protos import motion_metrics_pb2
 from IPython import embed
 
-# def _parse(data, step):
-#     # decoded_example = tf.io.parse_single_example(value, features_description)
+def _parse(data, hdmap_dir):
 
-#     # a = baidudataset(None, None)
-#     decoded_example = data
-    
-#     for k,v in decoded_example.items():
-#         if k != 'scenario/id' and k != 'relation':
-#             decoded_example[k] = tf.convert_to_tensor(v)
-
-
-#     past_states = tf.stack([
-#         decoded_example['state/past/x'],
-#         decoded_example['state/past/y'],
-#         decoded_example['state/past/length'],
-#         decoded_example['state/past/width'],
-#         decoded_example['state/past/bbox_yaw'],
-#         decoded_example['state/past/velocity_x'],
-#         decoded_example['state/past/velocity_y']
-#     ], -1)
-
-#     cur_states = tf.stack([
-#         decoded_example['state/current/x'],
-#         decoded_example['state/current/y'],
-#         decoded_example['state/current/length'],
-#         decoded_example['state/current/width'],
-#         decoded_example['state/current/bbox_yaw'],
-#         decoded_example['state/current/velocity_x'],
-#         decoded_example['state/current/velocity_y']
-#     ], -1)
-
-
-#     input_states = tf.concat([past_states, cur_states], 1)[:, :, :2]
-
-#     # try:
-#     future_states = tf.stack([
-#         decoded_example['state/future/x'],
-#         decoded_example['state/future/y'],
-#         decoded_example['state/future/length'],
-#         decoded_example['state/future/width'],
-#         decoded_example['state/future/bbox_yaw'],
-#         decoded_example['state/future/velocity_x'],
-#         decoded_example['state/future/velocity_y']
-#     ], -1)
-#     # except:
-#         # embed(header='abcde')
-#     try:
-#         gt_future_states = tf.concat([past_states, cur_states, future_states], axis=1)
-#     except:
-#         print("--------------------------------------", past_states.shape, cur_states.shape, future_states.shape)
-#         print("--------------------------------------", past_states.device, cur_states.device, future_states.device)
-
-#     past_is_valid = decoded_example['state/past/valid'] > 0
-#     current_is_valid = decoded_example['state/current/valid'] > 0
-#     future_is_valid = decoded_example['state/future/valid'] > 0
-#     gt_future_is_valid = tf.concat(
-#         [past_is_valid, current_is_valid, future_is_valid], 1)
-
-#     # If a sample was not seen at all in the past, we declare the sample as
-#     # invalid.
-#     sample_is_valid = tf.reduce_any(
-#         tf.concat([past_is_valid, current_is_valid], 1), 1)
-
-#     inputs = {
-#         'input_states': input_states,
-#         'gt_future_states': gt_future_states,
-#         'gt_future_is_valid': gt_future_is_valid,
-#         'object_type': decoded_example['state/type'],
-#         'tracks_to_predict': decoded_example['state/tracks_to_predict'] > 0,
-#         'interactive_tracks_to_predict': decoded_example['state/objects_of_interest'] > 0,
-#         'sample_is_valid': sample_is_valid,
-#     }
-
-#     return inputs, decoded_example
-
-
-def _parse(data):
-    
     decoded_example = data
+    # Combining agent information with high-definition map information.
+    map_id = decoded_example['scenario/map_id']
+    map_info_path = os.path.join(hdmap_dir, map_id + '.pickle')
 
+    with open(map_info_path, 'rb+') as f:
+        map_info = pickle.load(f)
+
+    decoded_example['roadgraph_samples/dir'] = map_info['roadgraph_samples/dir']
+    decoded_example['roadgraph_samples/xyz'] = map_info['roadgraph_samples/xyz']
+    decoded_example['roadgraph_samples/id'] = map_info['roadgraph_samples/id']
+    decoded_example['roadgraph_samples/type'] = map_info['roadgraph_samples/type']
+    decoded_example['roadgraph_samples/valid'] = map_info['roadgraph_samples/valid']
+    
     past_states = np.concatenate([
         decoded_example['state/past/x'][:, :, np.newaxis],
         decoded_example['state/past/y'][:, :, np.newaxis],

@@ -1,13 +1,9 @@
 import math
-
 import numpy as np
 import torch
 import torch.nn.functional as F
 from torch import nn, Tensor
-
 from .. import utils
-from IPython import embed
-
 
 class LayerNorm(nn.Module):
     r"""

@@ -3,19 +3,14 @@
 # Written by Zhijie Yan
 # All Rights Reserved
 
-import math
 import os
 import numpy as np
 from math import sqrt
-import matplotlib.path as mpath
-from IPython import embed
 import pickle
 from utils.interaction_utils import *
-import json
 import warnings
 import argparse
 warnings.filterwarnings("ignore")
-from tqdm import tqdm
 from p_tqdm import p_map
 
 def parse_config():

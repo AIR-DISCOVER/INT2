@@ -1,17 +1,12 @@
 from typing import Dict, List, Tuple, NamedTuple, Any
-
 import numpy as np
 import torch
 import torch.nn.functional as F
 from torch import nn, Tensor
-
 from .. import structs
 from .. import utils_cython
 from ..modeling.lib import PointSubGraph, GlobalGraphRes, CrossAttention, GlobalGraph, MLP
-
 from .. import utils, globals
-from IPython import embed
-
 
 class DecoderRes(nn.Module):
     def __init__(self, hidden_size, out_features=60):

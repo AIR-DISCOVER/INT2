@@ -15,23 +15,17 @@ from tqdm import tqdm as tqdm_
 from torch.utils.tensorboard import SummaryWriter
 import pickle
 import sys
-from IPython import embed
 import tensorflow as tf
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '4,5,6,7'
 
 def compile_pyx_files():
     if True:
-        os.chdir('/home/DISCOVER/yanzj/workspace/code/INT2_Benchmark/src')
+        os.chdir('src')
         if not os.path.exists('utils_cython.c') or not os.path.exists('utils_cython.cpython-36m-x86_64-linux-gnu.so') or \
                 os.path.getmtime('utils_cython.pyx') > os.path.getmtime('utils_cython.cpython-36m-x86_64-linux-gnu.so'):
             os.system('cython -a utils_cython.pyx && python setup.py build_ext --inplace')
-        os.chdir('../')
         
-# Comment out this line if pyx files have been compiled manually.
-# compile_pyx_files()
-
-
+        
 from . import utils, structs, globals
 from .modeling.vectornet import VectorNet
 from .waymo_tutorial import MotionMetrics, metrics_config, metric_names
@@ -481,7 +475,7 @@ def run(args):
     device = torch.device(
         "cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
 
-    print("Loading dataset", args.data_dir)
+    print("Loading dataset", args.data_txt)
 
     if args.distributed_training:
         queue = mp.Manager().Queue()
@@ -505,6 +499,17 @@ def run(args):
 
 def main():
     
+    # Comment out this line if pyx files have been compiled manually.
+    # if you running this page at first, please make bottom to True.
+    if False:
+        compile_pyx_files()
+    else:
+        os.chdir('src/')
+
+    print(os.getcwd())
+    print(os.path.abspath(__file__))
+    print(os.path.dirname(os.path.abspath(__file__)))
+
     parser = argparse.ArgumentParser()
     
     utils.add_argument(parser)

@@ -10,7 +10,6 @@ from math import sqrt
 from commonroad.common.file_reader import CommonRoadFileReader
 from commonroad.visualization.mp_renderer import MPRenderer
 import matplotlib.pyplot as plt
-from IPython import embed
 import pickle
 import cv2
 from utils.int2_type import tf_state_map, agent_type_map, agent_sub_type_map, lane_type_map

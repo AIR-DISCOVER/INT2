@@ -25,7 +25,6 @@ from matplotlib.pyplot import MultipleLocator
 from torch import Tensor
 from enum import IntEnum
 from . import globals, utils_cython, structs
-from IPython import embed
 _False = False
 if _False:
     import utils_cython
@@ -42,11 +41,14 @@ def add_argument(parser):
                         help="Whether to run eval on the dev set.")
     parser.add_argument("--do_test",
                         action='store_true')
-    parser.add_argument("--data_dir",
-                        nargs='*',
-                        default=["train/data/"],
-                        type=str)
+    # parser.add_argument("--data_dir",
+    #                     nargs='*',
+    #                     default=["train/data/"],
+    #                     type=str)
     parser.add_argument("--data_txt",
+                        required=True,
+                        type=str)
+    parser.add_argument("--hdmap_dir",
                         required=True,
                         type=str)
     parser.add_argument("--output_dir", default="tmp/", type=str)
@@ -240,10 +242,10 @@ def add_argument(parser):
                         type=str,
                         help="Name of config file.")
     # the following params are used for reactor predictions following I->R
-    parser.add_argument("--relation_file_path",
-                        default=None,
-                        type=str,
-                        help="Path of interaction relation file.")
+    # parser.add_argument("--relation_file_path",
+    #                     default=None,
+    #                     type=str,
+    #                     help="Path of interaction relation file.")
     parser.add_argument("--influencer_pred_file_path",
                         default=None,
                         type=str,
@@ -284,7 +286,7 @@ def add_argument(parser):
 
 
 class Args:
-    data_dir = None
+    # data_dir = None
     data_kind = None
     debug = None
     train_batch_size = None
@@ -504,9 +506,9 @@ def init(args_: Args, logger_):
         if os.path.exists(src_dir):
             subprocess.check_output('rm -r {}'.format(src_dir), shell=True, encoding='utf-8')
         os.makedirs(src_dir, exist_ok=False)
-        for each in os.listdir('src'):
+        for each in os.listdir('../src'):
             is_dir = '-r' if os.path.isdir(os.path.join('src', each)) else ''
-            subprocess.check_output(f'cp {is_dir} {os.path.join("src", each)} {src_dir}', shell=True, encoding='utf-8')
+            # subprocess.check_output(f'cp {is_dir} {os.path.join("src", each)} {src_dir}', shell=True, encoding='utf-8')
         with open(os.path.join(src_dir, 'cmd'), 'w') as file:
             file.write(' '.join(sys.argv))
     args.model_save_dir = os.path.join(args.output_dir, 'model_save')
@@ -572,8 +574,8 @@ def init(args_: Args, logger_):
     torch.manual_seed(args.seed)
     # os.makedirs(os.path.join(args.temp_file_dir, time_begin), exist_ok=True)
 
-    if isinstance(args.data_dir, str):
-        args.data_dir = [args.data_dir]
+    # if isinstance(args.data_dir, str):
+    #     args.data_dir = [args.data_dir]
 
     assert args.do_train or args.do_eval
 

@@ -290,4 +290,4 @@ CUDA_VISIBLE_DEVICES=1,2,5,6 python -m src.run --waymo \
 ```
 
 
-More detailed results can be found <a href="../int2_benchmark/M2I/scripts">here</a>
+More detailed results can be found <a href="../int2_benchmark/M2I/scripts">here</a>.

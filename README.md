@@ -49,9 +49,9 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 
 ## Getting Started
 
-- <h3><strong><a href='docs/INSTALL.md'>Installation</a></strong></h3>
-- <h3><strong><a href='docs/DATA_STRUCTURE.md'>Data structure</a></strong></h3> 
-- <h3><strong><a href='docs/DOWNLOADING.md'>Downloading</a></strong></h3> 
+- **<strong><a href='docs/INSTALL.md'>Installation</a></strong>**
+- **<strong><a href='docs/DATA_STRUCTURE.md'>Data structure</a></strong>**
+- **<strong><a href='docs/DOWNLOADING.md'>Downloading</a></strong>** 
 
 
 
@@ -101,14 +101,20 @@ python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/01
 ```
 
 ## Benchmark
-<h4 align='left'>We used <a href="https://github.com/Tsinghua-MARS-Lab/M2I">M2I</a> and <a href="https://github.com/sshaoshuai/MTR">MTR</a> as benchmarks for our dataset, you can use our benchmark refer <a href='docs/START_M2I.md'>INT2forM2I</a> and <a href='docs/START_MTR.md'>INT2forMTR</a>.
+<h4 align='left'>We used <a href="https://github.com/Tsinghua-MARS-Lab/M2I">M2I</a> and <a href="https://github.com/sshaoshuai/MTR">MTR</a> as benchmarks for our dataset.
+
+<h4>If you want to use them, please refer to</h4>
+
+- <a href="docs/START_M2I.md">M2I with INT2</a>
+- <a href="docs/START_M2I.md">MTR with INT2</a>
 
 
 <h4 align='left'>Quantitative results of M2I on our INT2 dataset.</h4>
 <a align='center'><img src='docs/images/model_results.png'></a>
 
 <h4 align='left'>Quantitative results of MTR on our INT2 dataset.</h4>
-<h3 align='left'>Comming soon.</h3>
+<h4 align='left'>Comming soon.</h4>
+
 
 ## Citation
 <h4 align='left'>If you find this work useful in your research, please consider cite:</h4>
@@ -122,3 +128,9 @@ python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/01
   year={2023}
 }
 ```
+
+
+## Reference
+Waymo open motion dataset: <a href="https://github.com/waymo-research/waymo-open-dataset">https://github.com/waymo-research/waymo-open-dataset</a>
+M2I: <a href="https://github.com/Tsinghua-MARS-Lab/M2I">https://github.com/Tsinghua-MARS-Lab/M2I</a>
+MTR: <a href="https://github.com/sshaoshuai/MTR">https://github.com/sshaoshuai/MTR</a>

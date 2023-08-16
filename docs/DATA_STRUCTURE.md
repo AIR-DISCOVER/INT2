@@ -1,4 +1,5 @@
 ## Data structure
+We processed the data in a data format similar to <a href="https://waymo.com/open/data/motion/">WOMD</a>.
 ```
 INT2_Dataset/
     ├──hdmap

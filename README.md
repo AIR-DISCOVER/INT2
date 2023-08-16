@@ -105,8 +105,8 @@ python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/01
 
 <h4>If you want to use them, please refer to</h4>
 
-- <a href="docs/START_M2I.md">M2I with INT2</a>
-- <a href="docs/START_M2I.md">MTR with INT2</a>
+- <a href="docs/START_M2I.md"><strong>M2I with INT2</strong></a>
+- <a href="docs/START_M2I.md"><strong>MTR with INT2</strong></a>
 
 
 <h4 align='left'>Quantitative results of M2I on our INT2 dataset.</h4>

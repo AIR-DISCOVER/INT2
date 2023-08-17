@@ -58,7 +58,7 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 <hr>
 
 
-<h3><strong><i>🚀 News</i></strong></h3>
+## <strong><i>🚀 News</i></strong>
 
 ><strong>[coming soon]</strong>: INT2 Motion Prediciton Challenge 2023 and INT2 Interactive Motion Prediction Challenge 2023 in this <a href="https://int2.cn/challenges">challenges page</a>.
 >
@@ -149,7 +149,7 @@ INT2_Dataset/
                         └──interaction_time
 ```
 
-for details, Please refer to the <a href="https://int2.cn/doc">data documentation</a>.
+for details, please refer to the <a href="https://int2.cn/doc">data documentation</a>.
 
 ## Interaction Define Pipeline
 We propose an algorithm that enables us to efficiently mine our vast dataset for interactions of research value.
@@ -187,7 +187,7 @@ python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/in
 213250706-010213264206.pickle
 ```
 
-multiple XML files, visualization images, and videos with a length of 9.1 seconds will be saved by default in the 
+multiple xml format files, visualization images, and videos with a length of 9.1 seconds will be saved by default in the 
  ```output/visualization``` folder
 
 ## Calculate Collision

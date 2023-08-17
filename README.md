@@ -29,9 +29,9 @@ For each intersection, we treat rush-hour and non-rush-hour segments as differen
 We benchmark the best open-sourced interactive trajectory prediction method on INT2 and Waymo Open Motion, under in-domain and cross-domain settings.
 
 
-<h4 align='left'>Additionally, the dataset poses an interesting domain mismatch challenge. For each intersection, we treat rush-hour and
-non-rush-hour segments as different domains. Peak time (a, b, c) and trough time (d, e, f).</h4>
-<a align='center'><img src='docs/images/teaser.png'></a>
+Additionally, the dataset poses an interesting domain mismatch challenge. For each intersection, we treat rush-hour and
+non-rush-hour segments as different domains. Peak time (a, b, c) and trough time (d, e, f).
+<img src='docs/images/teaser.png'>
 
 
 <hr>
@@ -39,11 +39,11 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 
 <h3><strong><i>🚀 News</i></strong></h3>
 
-><h4>[coming soon]: INT2 Motion Prediciton Challenge 2023 and INT2 Interactive Motion Prediction Challenge 2023 in this <a href="https://int2.cn/challenges">challenges page</a>.</h4>
+><strong>[coming soon]</strong>: INT2 Motion Prediciton Challenge 2023 and INT2 Interactive Motion Prediction Challenge 2023 in this <a href="https://int2.cn/challenges">challenges page</a>.
 >
-><h4>[2023-8-9]: The INT2 Dataset, Benchmark, Visulization toolbox and Interaction filter toolbox are released in this <a href="https://github.com/AIR-DISCOVER/INT2">code-base page</a>.</h4>
+><strong>[2023-8-9]</strong>: The INT2 Dataset, Benchmark, Visulization toolbox and Interaction filter toolbox are released in this <a href="https://github.com/AIR-DISCOVER/INT2">code-base page</a>.
 >
-><h4>[2023-8-8]: The INT2 Dataset Website are open in this <a href="https://int2.cn">website page</a>.</h4>
+><strong>[2023-8-8]:</strong> The INT2 Dataset Website are open in this <a href="https://int2.cn">website page</a>.
 > 
 <br>
 
@@ -56,68 +56,69 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 
 
 ## Interaction Define Pipeline
-<h4 align='left'>We propose an algorithm that enables us to efficiently mine our vast dataset for interactions of research value.</h4>
-<a align="center"><img src="docs/images/main.png"></a>
+We propose an algorithm that enables us to efficiently mine our vast dataset for interactions of research value.
+<img src="docs/images/main.png">
 
-<h4 align='left'>INT2 includes interactions between vehicles-vehicles, vechile-cyclist, and vehicle-pedestrian:</h4>
-<a align='center'><img src='docs/images/interactions_data_examples.png'></a>
+INT2 includes interactions between vehicles-vehicles, vechile-cyclist, and vehicle-pedestrian:
+<img src='docs/images/interactions_data_examples.png'>
 
-<h4 align='left'>Retrieve the interaction within the scenario dataset:</h4>
+Retrieve the interaction within the scenario dataset:
 
 ```
 python interaction_filter.py --scenario_path int2_dataset_example/scenario/0/010213250706-010213264206.pickle --output_dir
  int2_dataset_example/interaction_scenario/complete_scenario
 ```
 
-<h4 align='left'>Split the complete interactive scenario into interactive scenarios with a length of 9.1 seconds:</h4>
+Split the complete interactive scenario into interactive scenarios with a length of 9.1 seconds:
 
 ```
 python split_interaction.py --interaction_scenario_path int2_dataset_example/interaction_scenario/complete_scenario/0/010213250706-010213264206.pickle --output_dir int2_dataset_example/interaction_scenario/split_scenario
 ```
 
 ## Visualization
-<h4 align='left'>The visualization of the complete interactive scenario:</h4>
+The visualization of the complete interactive scenario:
 
 ```
 python vis_interaction_scenario.py --scenario_path int2_dataset_example/interaction_scenario/complete_scenario/0/010213250706-010213264206.pickle
 ```
 
-<h4 align='left'>The results will be saved by default in the output/visualization folder, including an XML file in CommonRoad format, frame-by-frame visualization images, and a complete video.</h4>
+The results will be saved by default in the output/visualization folder, including an XML file in CommonRoad format, frame-by-frame visualization images, and a complete video.
 
-<h4 align='left'>The visualization of the interactive scenario segments split into 9.1-second lengths.</h4>
+The visualization of the interactive scenario segments split into 9.1-second lengths.
 
 ```
 python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/interaction_scenario/complete_scenario/0/010
 213250706-010213264206.pickle
 ```
 
-<h4 align='left'>Multiple XML files, visualization images, and videos with a length of 9.1 seconds will be saved by default in the output/visualization folder.</h4>
+multiple XML files, visualization images, and videos with a length of 9.1 seconds will be saved by default in the 
+ ```output/visualization folder```
 
 ## Calculate Collision
-<h4 align="left">We report collision rates so that they function as baselines for potential trajectory generation (instead of trajectory forecasting) applications. Generated trajectories should be as collision-free as possible, under the criteria mentioned above. To calculate collision: </h4>
+We report collision rates so that they function as baselines for potential trajectory generation (instead of trajectory forecasting) applications. Generated trajectories should be as collision-free as possible, under the criteria mentioned above. To calculate collision:
 
 ```
 python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/010213250706-010213264206.pickle --hdmap_dir int2_dataset_example/hdmap
 ```
 
 ## Benchmark
-<h4 align='left'>We used <a href="https://github.com/Tsinghua-MARS-Lab/M2I">M2I</a> and <a href="https://github.com/sshaoshuai/MTR">MTR</a> as benchmarks for our dataset.
+We used <a href="https://github.com/Tsinghua-MARS-Lab/M2I">M2I</a> and <a href="https://github.com/sshaoshuai/MTR">MTR</a> as benchmarks for our dataset.
 
-<h4>If you want to use them, please refer to</h4>
+If you want to use them, please refer to
 
 - <a href="docs/START_M2I.md"><strong>M2I with INT2</strong></a>
 - <a href="docs/START_M2I.md"><strong>MTR with INT2</strong></a>
 
 
-<h4 align='left'>Quantitative results of M2I on our INT2 dataset.</h4>
-<a align='center'><img src='docs/images/model_results.png'></a>
+Quantitative results of M2I on our INT2 dataset.
+<img src='docs/images/model_results.png'>
 
-<h4 align='left'>Quantitative results of MTR on our INT2 dataset.</h4>
-<h4 align='left'>Comming soon.</h4>
+Quantitative results of MTR on our INT2 dataset.
+Comming soon.
 
 
 ## Citation
-<h4 align='left'>If you find this work useful in your research, please consider cite:</h4>
+If you find this work useful in your research, please consider cite: 
 
 
 ```

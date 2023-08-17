@@ -99,7 +99,7 @@ def boundary_collision(file_path):
     return ob_collision_rate, bd_collision_rate
 
 if __name__ == '__main__':
-    file_path = "/data22/yanzj/workspace/code/INT2/visualization/output/xml/CNN_PEK-16-1_po/CHN_PEK-HQEV604_20220716123412-1657946693_01_T-1.xml"
+    file_path = "output/visualization/8/010213355106-010213364106/010213355106-010213364106.xml"
     ob_collision_rate, bd_collision_rate = boundary_collision(file_path)
     print(f"ob_collision_rate: {ob_collision_rate}, bd_collision_rate: {bd_collision_rate}")
 

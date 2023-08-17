@@ -9,7 +9,28 @@
 </p>
 <h3 align="center">This is the official repository of the paper <a href='"https://arxiv.org'>INT2: Interactive Trajectory Prediction at Intersections.</a></h3>
 
-<h4 align="center"><em><a href="https://github.com/BJHYZJ">Zhijie Yan</a>, Pengfei Li, Zheng Fu, Shaocong Xu, Yongliang Shi, Xiaoxue Chen, Yuhang Zheng, Yang Li, Tianyu Liu, Chuxuan Li, Nairui Luo, Xu Gao, Yilun Chen, Zuoxu Wang, Yifeng Shi, Pengfei Huang, Zhengxiao Han, Jirui Yuan, Jiangtao Gong, Guyue Zhou, <a href="https://hangzhaomit.github.io/">Hang Zhao</a>, <a href="https://sites.google.com/view/fromandto">Hao Zhao</a></em></h4>
+<h4 align="center"><em><a href="https://github.com/BJHYZJ">Zhijie Yan</a>, 
+<a href="https://github.com/Philipflyg">Pengfei Li</a>, 
+<a href="">Zheng Fu</a>, 
+<a href="https://github.com/Daniellli">Shaocong Xu</a>, 
+<a href="#">Yongliang Shi</a>,
+<a href="https://github.com/cxx226">Xiaoxue Chen</a>, 
+<a href="#">Yuhang Zheng</a>, 
+<a href="#">Yang Li</a>, 
+<a href="https://scholar.google.com/citations?user=NAt3vgcAAAAJ&hl=en">Tianyu Liu</a>, 
+<a href="#">Chuxuan Li</a>, 
+<a href="#">Nairui Luo</a>, 
+<a href="#">Xu Gao</a>, 
+<a href="https://air.tsinghua.edu.cn/info/1046/1769.htm">Yilun Chen</a>, 
+<a href="https://shi.buaa.edu.cn/wangzuoxu/zh_CN/index.htm">Zuoxu Wang</a>, 
+<a href="#">Yifeng Shi</a>, 
+<a href="#">Pengfei Huang</a>, 
+<a href="https://github.com/0nhc">Zhengxiao Han</a>, 
+<a href="https://air.tsinghua.edu.cn/info/1012/1222.htm">Jirui Yuan</a>, 
+<a href="https://air.tsinghua.edu.cn/info/1046/1635.htm">Jiangtao Gong</a>, 
+<a href="https://air.tsinghua.edu.cn/info/1046/1199.htm">Guyue Zhou</a>, 
+<a href="https://hangzhaomit.github.io/">Hang Zhao</a>, 
+<a href="https://sites.google.com/view/fromandto">Hao Zhao</a></em></h4>
 
 <h5 align="center">Sponsored by Baidu Inc. through <a href="https://www.apollo.auto/">Apollo</a>-<a href="https://air.tsinghua.edu.cn/en/">AIR</a> Joint Research Center.</h5>
 
@@ -82,7 +103,7 @@ The visualization of the complete interactive scenario:
 python vis_interaction_scenario.py --scenario_path int2_dataset_example/interaction_scenario/complete_scenario/0/010213250706-010213264206.pickle
 ```
 
-The results will be saved by default in the output/visualization folder, including an XML file in CommonRoad format, frame-by-frame visualization images, and a complete video.
+The results will be saved by default in the output/visualization folder, including an XML file in <a href="https://gitlab.lrz.de/tum-cps/commonroad-scenarios/-/blob/master/documentation/XML_commonRoad_2020a.pdf">CommonRoad format</a>, frame-by-frame visualization images, and a complete video.
 
 The visualization of the interactive scenario segments split into 9.1-second lengths.
 
@@ -92,7 +113,7 @@ python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/in
 ```
 
 multiple XML files, visualization images, and videos with a length of 9.1 seconds will be saved by default in the 
- ```output/visualization folder```
+ ```output/visualization``` folder
 
 ## Calculate Collision
 We report collision rates so that they function as baselines for potential trajectory generation (instead of trajectory forecasting) applications. Generated trajectories should be as collision-free as possible, under the criteria mentioned above. To calculate collision:
@@ -100,6 +121,8 @@ We report collision rates so that they function as baselines for potential traje
 ```
 python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/010213250706-010213264206.pickle --hdmap_dir int2_dataset_example/hdmap
 ```
+We rasterize both agents and road elements, where agents are represented as rectangles and the road elements are decomposed into a combination of triangles. We use the IOU criteria to detect collisions between agents by computing the overlap between their corresponding rectangles. We also detect collisions between agents and road elements by checking if the rectangles overlap with the road element triangles. The collision rate equals the number of collisions divided by the total number of agent-agent pairs or agent-boundary pairs, you can find it in the <a href="../utils/collision_utils.py">code<a>.
+
 
 ## Benchmark
 We used <a href="https://github.com/Tsinghua-MARS-Lab/M2I">M2I</a> and <a href="https://github.com/sshaoshuai/MTR">MTR</a> as benchmarks for our dataset.
@@ -114,24 +137,29 @@ Quantitative results of M2I on our INT2 dataset.
 <img src='docs/images/model_results.png'>
 
 Quantitative results of MTR on our INT2 dataset.
+
 Comming soon.
 
 
 ## Citation
 If you find this work useful in your research, please consider cite: 
 
-
 ```
+TODO.
+```
+
+<!-- ```
 @article{yan2023int2,
   title={INT2: Interactive Trajectory Prediction at Intersections},
   author={Yan, Zhijie and Li, Pengfei and Fu, Zheng and Xu, Shaocong and Shi, Yongliang and Chen, Xiaoxue and Zheng, Yuhang and Li, Yang and Liu, Tianyu and Li, Chuxuan and Luo, Nairui and Gao, Xu and Chen, Yilun and Wang, Zuoxu and Shi, Yifeng and Huang, Pengfei and Han, Zhengxiao and Yuan, Jirui and Gong, Jiangtao and Zhou, Guyue and Zhao, Hang and Zhao, Hao},
   journal={International Conference on Computer Vision},
   year={2023}
 }
-```
+``` -->
 
 
 ## Reference
 - Waymo open motion dataset: <a href="https://github.com/waymo-research/waymo-open-dataset">https://github.com/waymo-research/waymo-open-dataset</a>
+- Commonroad: <a href="https://commonroad.in.tum.de/getting-started">https://commonroad.in.tum.de/getting-started</a>
 - M2I: <a href="https://github.com/Tsinghua-MARS-Lab/M2I">https://github.com/Tsinghua-MARS-Lab/M2I</a>
 - MTR: <a href="https://github.com/sshaoshuai/MTR">https://github.com/sshaoshuai/MTR</a>

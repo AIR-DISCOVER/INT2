@@ -12,7 +12,7 @@
 <h4 align="center"><em><a href="https://github.com/BJHYZJ">Zhijie Yan</a>, 
 <a href="https://github.com/Philipflyg">Pengfei Li</a>, 
 <a href="">Zheng Fu</a>, 
-<a href="https://github.com/Daniellli">Shaocong Xu</a>, 
+<a href="#">Shaocong Xu</a>, 
 <a href="#">Yongliang Shi</a>,
 <a href="https://github.com/cxx226">Xiaoxue Chen</a>, 
 <a href="#">Yuhang Zheng</a>, 
@@ -76,73 +76,73 @@ We processed the data in a data format similar to <a href="https://waymo.com/ope
 INT2_Dataset/
     ├──hdmap
     │      ├──LANE
-    │      │     ├──has_traffic_control
-    │      │     ├──lane_type
-    │      │     ├──turn_direction
-    │      │     ├──is_intersection
-    │      │     ├──left_neighbor_id
-    │      │     ├──right_neighbor_id
-    │      │     ├──predecessors
-    │      │     ├──successors
-    │      │     ├──centerline
-    │      │     ├──left_boundary
-    │      │     └──right_boundary
-    │      ├──STOPLINE
-    │      │     └──centerline
-    │      ├──CROSSWALK
-    │      │     └──polygon
-    │      ├──JUNCTION
-    │      │     └──polygon
-    │      └──MAP_RANGE 
-    │            ├──x_start  
-    │            ├──x_end 
-    │            ├──y_start  
-    │            └──y_end  
-    └──interaciton_scenario
-           ├──SCENARIO_ID
-           ├──MAP_ID
-           ├──DATA_ACQUISITION_TIME
-           │     ├──begin
-           │     │      ├──day
-           │     │      ├──hour
-           │     │      ├──minute
-           │     │      ├──second
-           │     │      └──weekday
-           │     └──begin
-           │            ├──day
-           │            ├──hour
-           │            ├──minute
-           │            ├──second
-           │            └──weekda
-           ├──TIMESTAMP_SCENARIO
-           ├──AGENT_INFO
-           │     ├──object_id
-           │     ├──object_type
-           │     ├──object_sub_type
-           │     └──state
-           │            ├──position_x
-           │            ├──position_y
-           │            ├──position_z
-           │            ├──theta
-           │            ├──velocity_x
-           │            ├──velocity_y
-           │            ├──length
-           │            ├──width
-           │            ├──height
-           │            └──valid
-           ├──TRAFFIC_LIGHTS_INFO
-           │     ├──tf_mapping_lane_id
-           │     ├──tf_state_valid
-           │     └──tf_state
-           └──INTERACTION_INFO
-                 ├──interested_agents
-                 └──interaction_pair_info
-                        ├──influencer_id
-                        ├──reactor_id
-                        ├──influencer_type
-                        ├──reactor_type
-                        ├──coexistence_time
-                        └──interaction_time
+    │      │     ├──has_traffic_control      # Whether the road is controlled by traffic signal lights.
+    │      │     ├──lane_type                # The type of road.
+    │      │     ├──turn_direction           # Whether the road have a turning direction.
+    │      │     ├──is_intersection          # Whether the road is an intersection.                                          
+    │      │     ├──left_neighbor_id         # The ID of the adjacent lane on the left side.                
+    │      │     ├──right_neighbor_id        # The ID of the adjacent lane on the right side.                
+    │      │     ├──predecessors             # The lane ID that follows the current lane.            
+    │      │     ├──successors               # The lane ID reached after crossing the current lane.          
+    │      │     ├──centerline               # The centerline of the lane.          
+    │      │     ├──left_boundary            # The left boundary of the lane.             
+    │      │     └──right_boundary           # The right boundary of the lane.              
+    │      ├──STOPLINE                          
+    │      │     └──centerline               # The stop line.         
+    │      ├──CROSSWALK                         
+    │      │     └──polygon                  # The outer boundary line of the crosswalk.       
+    │      ├──JUNCTION                         
+    │      │     └──polygon                  # The outer boundary line of the junction.       
+    │      └──MAP_RANGE                      # The extent of the intersection."    
+    │            ├──x_start                            
+    │            ├──x_end                           
+    │            ├──y_start                            
+    │            └──y_end                            
+    └──interaciton_scenario                          
+           ├──SCENARIO_ID                    # The name of the scene, named as "start time - end time".     
+           ├──MAP_ID                         # The hdmap ID corresponding to the scene
+           ├──DATA_ACQUISITION_TIME                          
+           │     ├──begin                    # The start time of data segment collection, specified precisely to the month, day, hour, minute, and second.     
+           │     │      ├──day                          
+           │     │      ├──hour                          
+           │     │      ├──minute                          
+           │     │      ├──second                          
+           │     │      └──weekday                          
+           │     └──end                      # The end time of data segment collection, specified precisely to the month, day, hour, minute, and second.
+           │            ├──day                          
+           │            ├──hour                          
+           │            ├──minute                          
+           │            ├──second                          
+           │            └──weekda                          
+           ├──TIMESTAMP_SCENARIO             # The complete timestamp on the complete scene.            
+           ├──AGENT_INFO                          
+           │     ├──object_id                # An integer ID for each object.         
+           │     ├──object_type              # An integer type for each object (Vehicle, Pedestrian, or Cyclist)           
+           │     ├──object_sub_type          # An integer type for each object (CYCLIST, MOTORCYCLIST, TRICYCLIST et al.)               
+           │     └──state                          
+           │            ├──position_x        # The x coordinate of each object at each time step.                 
+           │            ├──position_y        # The y coordinate of each object at each time step.                 
+           │            ├──position_z        # The z coordinate of each object at each time step.                 
+           │            ├──theta             # The theta coordinate of each object at each time step.            
+           │            ├──velocity_x        # The x component of the object velocity at each time step.                 
+           │            ├──velocity_y        # The y component of the object velocity at each time step.                 
+           │            ├──length            # The length of each object at each time step.             
+           │            ├──width             # The width of each object at each time step.            
+           │            ├──height            # The height of each object at each time step.             
+           │            └──valid             # A valid flag for all elements of features AGENT_INFO/state/XX. If set to 1, the element is populated with valid data, otherwise it is populated with -1.            
+           ├──TRAFFIC_LIGHTS_INFO                          
+           │     ├──tf_mapping_lane_id       # Road ID controlled by traffic signal lights.                  
+           │     ├──tf_state_valid           # A valid flag for all elements of features TRAFFIC_LIGHTS_INFO/XX. If set to 1, the element is populated with valid data, otherwise it is populated with -1.              
+           │     └──tf_state                 # The state of each traffic light at each time step.        
+           └──INTERACTION_INFO                          
+                 ├──interested_agents        # The ID of interested agents.                 
+                 └──interaction_pair_info                         
+                        ├──influencer_id     # The ID of influencer agent.                    
+                        ├──reactor_id        # The ID of reactor agent.                 
+                        ├──influencer_type   # The type of influencer agent.                      
+                        ├──reactor_type      # The type of reactor agent.	                   
+                        ├──coexistence_time  # The time when both influencer agent and reactor agent coexist.                       
+                        └──interaction_time  # The index corresponding to the time during which there is interaction between influencer agent and reactor agent.                       
 ```
 
 for details, please refer to the <a href="https://int2.cn/doc">data documentation</a>.

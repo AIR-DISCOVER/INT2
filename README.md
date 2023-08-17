@@ -71,10 +71,85 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 ## Getting Started
 
 - **<strong><a href='docs/INSTALL.md'>Installation</a></strong>**
-- **<strong><a href='docs/DATA_STRUCTURE.md'>Data structure</a></strong>**
 - **<strong><a href='docs/DOWNLOADING.md'>Downloading</a></strong>** 
 
 
+## Dataset Structure
+We processed the data in a data format similar to <a href="https://waymo.com/open/data/motion/">WOMD</a>.
+```
+INT2_Dataset/
+    ├──hdmap
+    │      ├──LANE
+    │      │     ├──has_traffic_control
+    │      │     ├──lane_type
+    │      │     ├──turn_direction
+    │      │     ├──is_intersection
+    │      │     ├──left_neighbor_id
+    │      │     ├──right_neighbor_id
+    │      │     ├──predecessors
+    │      │     ├──successors
+    │      │     ├──centerline
+    │      │     ├──left_boundary
+    │      │     └──right_boundary
+    │      ├──STOPLINE
+    │      │     └──centerline
+    │      ├──CROSSWALK
+    │      │     └──polygon
+    │      ├──JUNCTION
+    │      │     └──polygon
+    │      └──MAP_RANGE 
+    │            ├──x_start  
+    │            ├──x_end 
+    │            ├──y_start  
+    │            └──y_end  
+    └──interaciton_scenario
+           ├──SCENARIO_ID
+           ├──MAP_ID
+           ├──DATA_ACQUISITION_TIME
+           │     ├──begin
+           │     │      ├──day
+           │     │      ├──hour
+           │     │      ├──minute
+           │     │      ├──second
+           │     │      └──weekday
+           │     └──begin
+           │            ├──day
+           │            ├──hour
+           │            ├──minute
+           │            ├──second
+           │            └──weekda
+           ├──TIMESTAMP_SCENARIO
+           ├──AGENT_INFO
+           │     ├──object_id
+           │     ├──object_type
+           │     ├──object_sub_type
+           │     └──state
+           │            ├──position_x
+           │            ├──position_y
+           │            ├──position_z
+           │            ├──theta
+           │            ├──velocity_x
+           │            ├──velocity_y
+           │            ├──length
+           │            ├──width
+           │            ├──height
+           │            └──valid
+           ├──TRAFFIC_LIGHTS_INFO
+           │     ├──tf_mapping_lane_id
+           │     ├──tf_state_valid
+           │     └──tf_state
+           └──INTERACTION_INFO
+                 ├──interested_agents
+                 └──interaction_pair_info
+                        ├──influencer_id
+                        ├──reactor_id
+                        ├──influencer_type
+                        ├──reactor_type
+                        ├──coexistence_time
+                        └──interaction_time
+```
+
+for details, Please refer to the <a href="https://int2.cn/doc">data documentation</a>.
 
 ## Interaction Define Pipeline
 We propose an algorithm that enables us to efficiently mine our vast dataset for interactions of research value.
@@ -121,7 +196,7 @@ We report collision rates so that they function as baselines for potential traje
 ```
 python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/010213250706-010213264206.pickle --hdmap_dir int2_dataset_example/hdmap
 ```
-We rasterize both agents and road elements, where agents are represented as rectangles and the road elements are decomposed into a combination of triangles. We use the IOU criteria to detect collisions between agents by computing the overlap between their corresponding rectangles. We also detect collisions between agents and road elements by checking if the rectangles overlap with the road element triangles. The collision rate equals the number of collisions divided by the total number of agent-agent pairs or agent-boundary pairs, you can find it in the <a href="utils/collision_utils.py">code<a>.
+we rasterize both agents and road elements, where agents are represented as rectangles and the road elements are decomposed into a combination of triangles. We use the IOU criteria to detect collisions between agents by computing the overlap between their corresponding rectangles. We also detect collisions between agents and road elements by checking if the rectangles overlap with the road element triangles. The collision rate equals the number of collisions divided by the total number of agent-agent pairs or agent-boundary pairs, you can find it in the <a href="utils/collision_utils.py">code<a>.
 
 
 ## Benchmark

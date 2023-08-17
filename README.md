@@ -55,7 +55,7 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 <img src='docs/images/teaser.png'>
 
 
-<hr>
+
 
 
 ## <strong><i>🚀 News</i></strong>

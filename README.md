@@ -56,7 +56,7 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 
 
 
-
+<br>
 
 ## <strong><i>🚀 News</i></strong>
 
@@ -66,7 +66,7 @@ non-rush-hour segments as different domains. Peak time (a, b, c) and trough time
 >
 ><strong>[2023-8-8]:</strong> The INT2 Dataset Website are open in this <a href="https://int2.cn">website page</a>.
 > 
-<br>
+
 
 ## Getting Started
 

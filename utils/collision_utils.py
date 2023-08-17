@@ -3,7 +3,6 @@
 # Written by Zhijie Yan
 # All Rights Reserved
 
-import numpy as np
 from commonroad.common.file_reader import CommonRoadFileReader
 from commonroad.geometry.shape import Polygon, ShapeGroup
 from commonroad.scenario.obstacle import StaticObstacle, ObstacleType,DynamicObstacle

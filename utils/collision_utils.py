@@ -28,15 +28,6 @@ def construct_boundary_checker(scenario: Scenario) -> CollisionChecker:
         p = Polygon(np.array(r.vertices()))
         road_boundary_shape_list.append(p)
     
-    ####visulize boundary######
-    # plt.figure(figsize=(25, 25))
-    # plt.axis('off')
-    # rnd = MPRenderer()
-    # for r in road_boundary_shape_list:
-    #     r.draw(rnd)
-    # rnd.render()
-    # plt.savefig('t.png')
-    
     road_bound = StaticObstacle(obstacle_id=scenario.generate_object_id(),
                                 obstacle_type=ObstacleType.ROAD_BOUNDARY,
                                 obstacle_shape=ShapeGroup(road_boundary_shape_list),

@@ -121,7 +121,7 @@ We report collision rates so that they function as baselines for potential traje
 ```
 python calculate_collision.py --scenario_path int2_dataset_example/scenario/0/010213250706-010213264206.pickle --hdmap_dir int2_dataset_example/hdmap
 ```
-We rasterize both agents and road elements, where agents are represented as rectangles and the road elements are decomposed into a combination of triangles. We use the IOU criteria to detect collisions between agents by computing the overlap between their corresponding rectangles. We also detect collisions between agents and road elements by checking if the rectangles overlap with the road element triangles. The collision rate equals the number of collisions divided by the total number of agent-agent pairs or agent-boundary pairs, you can find it in the <a href="../utils/collision_utils.py">code<a>.
+We rasterize both agents and road elements, where agents are represented as rectangles and the road elements are decomposed into a combination of triangles. We use the IOU criteria to detect collisions between agents by computing the overlap between their corresponding rectangles. We also detect collisions between agents and road elements by checking if the rectangles overlap with the road element triangles. The collision rate equals the number of collisions divided by the total number of agent-agent pairs or agent-boundary pairs, you can find it in the <a href="utils/collision_utils.py">code<a>.
 
 
 ## Benchmark

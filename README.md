@@ -49,9 +49,6 @@ Additionally, the dataset poses an interesting domain mismatch challenge.
 For each intersection, we treat rush-hour and non-rush-hour segments as different domains.
 We benchmark the best open-sourced interactive trajectory prediction method on INT2 and Waymo Open Motion, under in-domain and cross-domain settings.
 
-
-Additionally, the dataset poses an interesting domain mismatch challenge. For each intersection, we treat rush-hour and
-non-rush-hour segments as different domains. Peak time (a, b, c) and trough time (d, e, f).
 <img src='docs/images/teaser.png'>
 
 

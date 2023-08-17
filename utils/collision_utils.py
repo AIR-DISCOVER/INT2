@@ -99,7 +99,7 @@ def boundary_collision(file_path):
     return ob_collision_rate, bd_collision_rate
 
 if __name__ == '__main__':
-    file_path = "output/visualization/8/010213355106-010213364106/010213355106-010213364106.xml"
+    file_path = "../output/visualization/8/010213355106-010213364106/010213355106-010213364106.xml"
     ob_collision_rate, bd_collision_rate = boundary_collision(file_path)
     print(f"ob_collision_rate: {ob_collision_rate}, bd_collision_rate: {bd_collision_rate}")
 

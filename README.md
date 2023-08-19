@@ -145,7 +145,7 @@ INT2_Dataset/
                         └──interaction_time  # The index corresponding to the time during which there is interaction between influencer agent and reactor agent.                       
 ```
 
-for details, please refer to the <a href="https://int2.cn/doc">data documentation</a>.
+for details, please refer to the <a href="https://int2.cn/doc">dataset documentation</a>.
 
 ## Interaction Define Pipeline
 We propose an algorithm that enables us to efficiently mine our vast dataset for interactions of research value.
@@ -201,7 +201,7 @@ We used <a href="https://github.com/Tsinghua-MARS-Lab/M2I">M2I</a> and <a href="
 If you want to use them, please refer to
 
 - <a href="docs/START_M2I.md"><strong>M2I with INT2</strong></a>
-- <a href="docs/START_M2I.md"><strong>MTR with INT2</strong></a>
+- <a href="docs/START_MTR.md"><strong>MTR with INT2</strong></a>
 
 
 Quantitative results of M2I on our INT2 dataset.

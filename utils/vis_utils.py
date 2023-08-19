@@ -103,7 +103,6 @@ def scenario2xml(hdmap_path, scenario_path, xml_output_path):
         res +=      d_list[1] + '<laneletType>' + lane_type_ + '</laneletType>' + '\n'
         res += d_list[0] + '</lanelet>' + '\n'
         
-        
         with open(xml_output_path_new, 'a') as data_file:
             data_file.write(res)
             

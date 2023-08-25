@@ -215,18 +215,18 @@ Comming soon.
 ## Citation
 If you find this work useful in your research, please consider cite: 
 
-```
-TODO.
-```
-
 <!-- ```
+TODO.
+``` -->
+
+```
 @article{yan2023int2,
   title={INT2: Interactive Trajectory Prediction at Intersections},
   author={Yan, Zhijie and Li, Pengfei and Fu, Zheng and Xu, Shaocong and Shi, Yongliang and Chen, Xiaoxue and Zheng, Yuhang and Li, Yang and Liu, Tianyu and Li, Chuxuan and Luo, Nairui and Gao, Xu and Chen, Yilun and Wang, Zuoxu and Shi, Yifeng and Huang, Pengfei and Han, Zhengxiao and Yuan, Jirui and Gong, Jiangtao and Zhou, Guyue and Zhao, Hang and Zhao, Hao},
-  journal={International Conference on Computer Vision},
+  journal={Proceedings of the IEEE/CVF International Conference on Computer Vision},
   year={2023}
 }
-``` -->
+```
 
 
 ## Reference

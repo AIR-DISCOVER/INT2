@@ -16,7 +16,7 @@ def parse_config():
     parser.add_argument('--scenario_path', type=str, default='int2_dataset_example/interaction_scenario/complete_scenario/8/010213355106-010213364106.pickle',
                          help='The scenario path to be visualized')
     parser.add_argument('--output_dir', type=str, default='output/visualization', help='')
-    parser.add_argument('--hdmap_dir', type=str, default='int2_dataset/hdmap', help='')
+    parser.add_argument('--hdmap_dir', type=str, default='int2_dataset_example/hdmap', help='')
     parser.add_argument('--tf_complete_id_path', type=str, default='config/tf_complete_id.json', 
                         help='The complete road ID controlled by the traffic light')
     parser.add_argument('--video_len', type=int, default=None, help='')

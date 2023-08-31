@@ -157,21 +157,20 @@ INT2 includes interactions between vehicles-vehicles, vechile-cyclist, and vehic
 Retrieve the interaction within the scenario dataset:
 
 ```
-python interaction_filter.py --scenario_path int2_dataset_example/scenario/0/010213250706-010213264206.pickle --output_dir
- int2_dataset_example/interaction_scenario/complete_scenario
+python interaction_filter.py --scenario_path int2_dataset_example/scenario/8/012510365201-012510382601.pickle --output_dir int2_dataset_example/interaction_scenario/complete_scenario
 ```
 
 Split the complete interactive scenario into interactive scenarios with a length of 9.1 seconds:
 
 ```
-python split_interaction.py --interaction_scenario_path int2_dataset_example/interaction_scenario/complete_scenario/0/010213250706-010213264206.pickle --output_dir int2_dataset_example/interaction_scenario/split_scenario
+python split_interaction.py --interaction_scenario_path int2_dataset_example/interaction_scenario/complete_scenario/8/012510365201-012510382601.pickle --output_dir int2_dataset_example/interaction_scenario/split_scenario
 ```
 
 ## Visualization
 The visualization of the complete interactive scenario:
 
 ```
-python vis_interaction_scenario.py --scenario_path int2_dataset_example/interaction_scenario/complete_scenario/0/010213250706-010213264206.pickle
+python vis_interaction_scenario.py --scenario_path int2_dataset_example/interaction_scenario/complete_scenario/8/012510365201-012510382601.pickle
 ```
 
 The results will be saved by default in the output/visualization folder, including an XML file in <a href="https://gitlab.lrz.de/tum-cps/commonroad-scenarios/-/blob/master/documentation/XML_commonRoad_2020a.pdf">CommonRoad format</a>, frame-by-frame visualization images, and a complete video.
@@ -179,8 +178,7 @@ The results will be saved by default in the output/visualization folder, includi
 The visualization of the interactive scenario segments split into 9.1-second lengths.
 
 ```
-python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/interaction_scenario/complete_scenario/0/010
-213250706-010213264206.pickle
+python vis_split_interaction_scenario.py --scenario_path int2_dataset_example/interaction_scenario/complete_scenario/8/012510365201-012510382601.pickle
 ```
 
 multiple xml format files, visualization images, and videos with a length of 9.1 seconds will be saved by default in the 

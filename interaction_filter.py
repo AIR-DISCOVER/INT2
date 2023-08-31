@@ -16,7 +16,7 @@ from utils.interaction_utils import *
 
 def parse_config():
     parser = argparse.ArgumentParser(description='INT2 Dataset Interaction Filter Visualization.')
-    parser.add_argument('--scenario_path', type=str, default='int2_dataset_example/scenario/8/010213355106-010213364106.pickle',
+    parser.add_argument('--scenario_path', '--s' type=str, default='int2_dataset_example/scenario/8/010213355106-010213364106.pickle',
                          help='The scenario path to be visualized')
     parser.add_argument('--output_dir', type=str, default='int2_dataset_example/interaction_scenario/complete_scenario', help='')
     args = parser.parse_args()
@@ -140,8 +140,7 @@ def multi_thread_process():
     scenario_dir_names = sorted(os.listdir(scenario_floder), key=lambda x: int(x))
     
     for idx, scenario_id in enumerate(scenario_dir_names):
-        if idx < 13:
-            continue
+
         print(f'now are processed in {scenario_id}th')
         scenario_files = [os.path.join(scenario_floder, scenario_id, f) for f 
                           in os.listdir(os.path.join(scenario_floder, scenario_id))]

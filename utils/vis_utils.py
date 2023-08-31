@@ -250,7 +250,7 @@ def xml2video(xml_output_path, video_output_path, MAP_RANGE_INFO, LANE, STOPLINE
     tf_state = TRAFFIC_LIGHTS_INFO['tf_state']
     tf_state_valid = TRAFFIC_LIGHTS_INFO['tf_state_valid']
     tf_mapping_lane_id = TRAFFIC_LIGHTS_INFO['tf_mapping_lane_id']
-   
+
     tf_num = tf_state.shape[0]
     tf_num_new = tf_num
     for key, value in tf_complete_id_map_info.items():
@@ -351,8 +351,8 @@ def xml2video(xml_output_path, video_output_path, MAP_RANGE_INFO, LANE, STOPLINE
                     else:
                         color = 'yellow'
 
-                    plt.plot(lane_left_boundary[:, 0], lane_left_boundary[:, 1], color=color, linewidth=2, zorder=30)
-                    plt.plot(lane_right_boundary[:, 0], lane_right_boundary[:, 1], color=color, linewidth=2, zorder=30)
+                    # plt.plot(lane_left_boundary[:, 0], lane_left_boundary[:, 1], color=color, linewidth=2, zorder=30)
+                    # plt.plot(lane_right_boundary[:, 0], lane_right_boundary[:, 1], color=color, linewidth=2, zorder=30)
                     
                     lane_width = min(np.sqrt((l_position_x - r_position_x) ** 2 + (l_position_y - r_position_y) ** 2))
                     s = 100
@@ -366,11 +366,18 @@ def xml2video(xml_output_path, video_output_path, MAP_RANGE_INFO, LANE, STOPLINE
                     index = tf_mapping_lane_id_new.index(int(lanelet_id))
                     if tf_state_valid_new[index, i]:
                         if tf_state_map[tf_state_new[index, i]] == 'GREEN':
-                            plt.plot(lane_left_boundary[:, 0], lane_left_boundary[:, 1], color=tf_state_map[tf_state_new[index, i]], linewidth=4, zorder=15, alpha=0.2)
-                            plt.plot(lane_right_boundary[:, 0], lane_right_boundary[:, 1], color=tf_state_map[tf_state_new[index, i]], linewidth=4, zorder=15, alpha=0.2)
+                            zorder_num = 16
+                            alpha = 0.8
+                            linewidth_num = 1
                             plt.fill(list(lane_left_boundary[:, 0]) + list(lane_right_boundary[:, 0][::-1]), \
-                                    list(lane_left_boundary[:, 1]) + list(lane_right_boundary[:, 1][::-1]), color=tf_state_map[tf_state_new[index, i]], zorder=15, alpha=0.2)
-
+                                    list(lane_left_boundary[:, 1]) + list(lane_right_boundary[:, 1][::-1]), color=tf_state_map[tf_state_new[index, i]], zorder=zorder_num, alpha=0.2)
+                        elif tf_state_map[tf_state_new[index, i]] == 'RED':
+                            zorder_num = 15
+                            alpha = 0.5
+                            linewidth_num = 0.5
+                        plt.plot(lane_left_boundary[:, 0], lane_left_boundary[:, 1], color=tf_state_map[tf_state_new[index, i]], linewidth=linewidth_num, zorder=zorder_num, alpha=alpha)
+                        plt.plot(lane_right_boundary[:, 0], lane_right_boundary[:, 1], color=tf_state_map[tf_state_new[index, i]], linewidth=linewidth_num, zorder=zorder_num, alpha=alpha)
+                            
 
         if STOPLINE:
             for stopline_id in STOPLINE.keys():
@@ -459,13 +466,6 @@ def xml2video_split(xml_output_path, video_output_path, MAP_RANGE_INFO, LANE, ST
             tf_state_new[tmp_num] = tf_state[index]
             tf_state_valid_new[tmp_num] = tf_state_valid[index]
             tmp_num += 1
-
-    if not video_len:
-        video_len = tf_state.shape[1]
-    elif video_len > tf_state.shape[1]:
-        video_len = tf_state.shape[1]
-    else:
-        pass
     
     if split_interaction_info:
         for key, value in split_interaction_info.items():
@@ -556,11 +556,17 @@ def xml2video_split(xml_output_path, video_output_path, MAP_RANGE_INFO, LANE, ST
                             index = tf_mapping_lane_id_new.index(int(lanelet_id))
                             if tf_state_valid_new[index, i]:
                                 if tf_state_map[tf_state_new[index, i]] == 'GREEN':
-                                    plt.plot(lane_left_boundary[:, 0], lane_left_boundary[:, 1], color=tf_state_map[tf_state_new[index, i]], linewidth=4, zorder=15, alpha=0.2)
-                                    plt.plot(lane_right_boundary[:, 0], lane_right_boundary[:, 1], color=tf_state_map[tf_state_new[index, i]], linewidth=4, zorder=15, alpha=0.2)
+                                    zorder_num = 16
+                                    alpha = 0.8
+                                    linewidth_num = 1
                                     plt.fill(list(lane_left_boundary[:, 0]) + list(lane_right_boundary[:, 0][::-1]), \
-                                            list(lane_left_boundary[:, 1]) + list(lane_right_boundary[:, 1][::-1]), color=tf_state_map[tf_state_new[index, i]], zorder=15, alpha=0.2)
-
+                                            list(lane_left_boundary[:, 1]) + list(lane_right_boundary[:, 1][::-1]), color=tf_state_map[tf_state_new[index, i]], zorder=zorder_num, alpha=0.2)
+                                elif tf_state_map[tf_state_new[index, i]] == 'RED':
+                                    zorder_num = 15
+                                    alpha = 0.5
+                                    linewidth_num = 0.5
+                                plt.plot(lane_left_boundary[:, 0], lane_left_boundary[:, 1], color=tf_state_map[tf_state_new[index, i]], linewidth=linewidth_num, zorder=zorder_num, alpha=alpha)
+                                plt.plot(lane_right_boundary[:, 0], lane_right_boundary[:, 1], color=tf_state_map[tf_state_new[index, i]], linewidth=linewidth_num, zorder=zorder_num, alpha=alpha)
 
                 if STOPLINE:
                     for stopline_id in STOPLINE.keys():

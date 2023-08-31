@@ -16,7 +16,7 @@ def parse_config():
     parser.add_argument('--scenario_path', '--s', type=str, default='int2_dataset_example/interaction_scenario/complete_scenario/8/010213355106-010213364106.pickle',
                          help='The scenario path to be visualized')
     parser.add_argument('--output_dir', type=str, default='output/visualization', help='')
-    parser.add_argument('--hdmap_dir', type=str, default='int2_dataset/hdmap', help='')
+    parser.add_argument('--hdmap_dir', type=str, default='int2_dataset_example/hdmap', help='')
     parser.add_argument('--tf_complete_id_path', type=str, default='config/tf_complete_id.json', 
                         help='The complete road ID controlled by the traffic light')
     parser.add_argument('--video_len', type=int, default=None, help='')
@@ -92,7 +92,7 @@ def multi_process():
                 hdmap_path, complete_path, xml_output_path)
             
             xml2video_split(xml_output_path_new, video_output_path, MAP_RANGE, LANE, STOPLINE, 
-                CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO, tf_complete_id_map_info, video_len=None, delete_img=False, split_interaction_info=split_interaction_info)
+                CROSSWALK, JUNCTION, TRAFFIC_LIGHTS_INFO, tf_complete_id_map_info, delete_img=False, split_interaction_info=split_interaction_info)
 
 if __name__ == "__main__":
     main()

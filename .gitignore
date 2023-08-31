@@ -40,3 +40,4 @@ int2_dataset_example/hdmap/15.json
 process_hdmap.py
 int2_dataset/hdmap_interpolate
 int2_dataset_example/hdmap/0.json
+int2_dataset/hdmap_no_interpolate

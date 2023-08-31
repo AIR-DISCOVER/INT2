@@ -22,7 +22,6 @@ int2_benchmark/M2I/output/*
 int2_benchmark/M2I/scripts/vis.sh
 utils/vis_utils_test.py
 vis_test.py
-int2_dataset_example/hdmap/0.json
 int2_dataset_example/hdmap/1.json
 int2_dataset_example/hdmap/2.json
 int2_dataset_example/hdmap/3.json
